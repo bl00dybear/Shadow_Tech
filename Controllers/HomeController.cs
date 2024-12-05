@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Shadow_Tech.Data;
 using Shadow_Tech.Models;
 using System.Diagnostics;
 
@@ -6,6 +7,7 @@ namespace Shadow_Tech.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext db;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
