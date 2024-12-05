@@ -1,0 +1,31 @@
+# Visual Studio temporary files
+*.suo
+*.user
+*.userprefs
+*.tmp
+*.cache
+*.vspscc
+*.vssscc
+
+# Build output
+bin/
+obj/
+
+# Packages
+packages/
+*.nupkg
+
+# Local IIS settings
+*.sdf
+*.dbmdl
+
+# Temporary files
+*.log
+*.sync
+*.suo
+
+# User-specific files
+.vs/
+
+# Specific to your project
+src/Data/temp.txt
