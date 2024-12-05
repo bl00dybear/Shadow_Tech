@@ -26,16 +26,18 @@ html {
 
 body {
     color: #ef4f7b;
-    background-color: #1d1d1d;
-    font-family: Riseria, sans-serif
+    font-family: Riseria, sans-serif;
+    background: url('../images/BackGroundShadowTech.png') repeat;
+    background-size: cover;
 }
 
 .firstlook {
 /*    margin-top:-10vh;*/
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+/*    align-items: center;*/
+    height: 100vh; 
+/*    justify-content: space-between;*/
 }
 
 .firstlook img {
@@ -44,5 +46,41 @@ body {
     height:auto;
     max-height: 200%;
     max-width:200%;
+}
+
+.dec2 {
+    /*    margin-top:-15vh;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartonas {
+    width: 35vh;
+    height: 40vh;
+    background-color: #2d181b;
+    border-radius: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 45px;
+    box-shadow: 8px 8px 10px rgba(255, 255, 255, 0.5);
+}
+.img3cartonas {
+/*    width: 35vh;
+    height: 45vh;
+    border-radius: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 45px;*/
+    margin-top:45px;
+    width:100vw;
+}
+.img1cartonas {
+    width: 35vh;
+    height: 40vh;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 45px;
+    border-radius: 10px;
 }
 
