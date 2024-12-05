@@ -25,25 +25,24 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
     color: #ef4f7b;
     background-color: #1d1d1d;
     font-family: Riseria, sans-serif
 }
 
 .firstlook {
+/*    margin-top:-10vh;*/
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-    .firstlook img {
-        object-fit: contain;
-        max-width: 100%;
-    }
-
-.navbar {
-    color: #ef4f7b;
-    background-color: #1d1d1d;
+.firstlook img {
+    object-fit: contain;
+    width:100vw;
+    height:auto;
+    max-height: 200%;
+    max-width:200%;
 }
+
