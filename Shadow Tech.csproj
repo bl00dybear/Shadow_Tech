@@ -4,7 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-WebApplication1-545ada66-4c8b-470d-ae52-36fe89b6b0dc</UserSecretsId>
+    <UserSecretsId>aspnet-Shadow_Tech-0996e6fd-f417-4336-aa67-2c5e183c9812</UserSecretsId>
+    <RootNamespace>Shadow_Tech</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Shadow_Tech.Models;
 using System.Diagnostics;
-using WebApplication1.Models;
 
-namespace WebApplication1.Controllers
+namespace Shadow_Tech.Controllers
 {
     public class HomeController : Controller
     {

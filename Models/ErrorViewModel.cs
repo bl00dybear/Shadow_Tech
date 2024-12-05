@@ -1,4 +1,4 @@
-namespace WebApplication1.Models
+namespace Shadow_Tech.Models
 {
     public class ErrorViewModel
     {
