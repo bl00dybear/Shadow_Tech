@@ -7,7 +7,7 @@ namespace Shadow_Tech.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext? db;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)

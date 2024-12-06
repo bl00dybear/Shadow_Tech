@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shadow_Tech.Data;
 using System;
 
@@ -13,7 +14,10 @@ namespace Shadow_Tech.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var products = db.Products.Include("Category").ToList();
+            //ViewBag.Products = products;
+
+            return View(products);
         }
     }
 }
