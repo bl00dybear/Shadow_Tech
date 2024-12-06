@@ -9,6 +9,13 @@
     font-style: normal; 
 }
 
+@font-face {
+    font-family: 'Brave';
+    src: url('../fonts/ViolentBrave-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -92,11 +99,12 @@ header {
     color: #7d4e72;
     /*background-color: #f8f9fa;*/ /* Culoarea de fundal a antetului */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Umbra antetului */
+    font-family:Brave;
 }
 
 header a {
-    padding: 24px 48px; /* Mărește spațiul interior (vertical x orizontal) */
-    font-size: 2.5rem;
+    padding: 24px 50px; /* Mărește spațiul interior (vertical x orizontal) */
+    font-size: 3rem;
     text-decoration: none;
     color: #7d4e72;
     transition: background-color 0.3s, color 0.3s;
