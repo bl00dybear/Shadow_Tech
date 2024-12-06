@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -7,6 +7,13 @@ html {
     src: url('../fonts/RiseriaRegular-YzYRO.ttf') format('truetype');
     font-weight: normal; 
     font-style: normal; 
+}
+
+@font-face {
+    font-family: 'Brave';
+    src: url('../fonts/ViolentBrave-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @media (min-width: 768px) {
@@ -24,18 +31,44 @@ html {
     min-height: 100%;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #7d4e72;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Brave;
+}
+
+header a {
+    padding: 24px 50px;
+    font-size: 3rem;
+    text-decoration: none;
+    color: #7d4e72;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+header a:hover {
+    background-color: #71648b;
+    color: #fff;
+}
+
 body {
     color: #ef4f7b;
-    background-color: #1d1d1d;
-    font-family: Riseria, sans-serif
+    font-family: Riseria, sans-serif;
+    background: url('../images/BackGroundShadowTech.png') repeat;
+    background-size: cover;
 }
 
 .firstlook {
-/*    margin-top:-10vh;*/
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items:center;
+    width:100vw;
+    height:100vh;
+    max-width:100%;
 }
 
 .firstlook img {
@@ -46,3 +79,98 @@ body {
     max-width:200%;
 }
 
+.dec2 {
+        margin-top:-15vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*.cartonas {
+    width: 35vh;
+    height: 40vh;
+    background-color: #2d181b;
+    border-radius: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 45px;
+    box-shadow: 8px 8px 10px rgb(125,78,114);
+}*/
+
+/*.container_row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);*/ /* 3 coloane egale pentru ecrane mari */
+    /*gap: 20px;*/ /* spațiu între div-uri */
+    /*padding: 20px;*/
+    /*    height:auto;*/
+    /*width: 100%;
+    height: auto;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    padding-top: 133.33%;*/ /* Proporția 3:4 (4/3 = 1.3333, deci 100% / 1.3333 = 75%) */
+    /*background-color: #f4f4f4;*/ /* Poți schimba culoarea de fundal după dorință */
+    /*border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/ /* Umbră subtile pentru cartonaș */
+    /*overflow: hidden;
+    transition: transform 0.3s ease;
+}*/
+
+    /* Stare la hover pentru cartonaș */
+    /*.card:hover {
+        transform: scale(1.05);
+    }
+
+.img_3card {
+    grid-column: span 3;
+ 
+}
+
+@media (max-width: 1000px) {
+    .container_row {
+        grid-template-columns: 1fr;*/ /* Un singur cartonaș pe linie */
+    /*}
+
+    .img_3card {
+        width: 100%; 
+        padding-top: 75%; 
+    }
+}*/
+
+
+
+/*.img_3card {
+    width: 100%;
+    padding-top: 75%;
+    object-fit: cover; 
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+.img1cartonas {
+    width: 35vh;
+    height: 40vh;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 45px;
+    border-radius: 10px;
+}*/
+
+
+
+.homeCard {
+    width: 23rem;
+    margin-top: 20px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    border-color: #7a3a84;
+    margin-left: 25px;
+    color: #7a3a84;
+    box-shadow: 8px 8px 10px #f15178;
+}
+.homeCard img{
+    margin-top:15px;
+    align-self:center;
+}

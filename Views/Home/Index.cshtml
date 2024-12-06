@@ -1,8 +1,78 @@
-﻿@{
+﻿@model IEnumerable<Shadow_Tech.Models.Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="firstlook">
-    <img src="images/Logo ShadowTechNB.png" alt="Cap de tap">
+	<img class="img-fluid" style="width:120%" src="images/ShadowTech.png" alt="Cap de tap">
 </div>
+
+<div class="container">
+	
+	<div class="dec2 p-2">
+		<img src="images/dec1.png" alt="Decoratiune">
+		<img src="images/dec1.png" alt="Decoratiune">
+	</div>
+	@{
+		var productList = Model?.ToList() ?? new List<Product>();
+	}
+	@for(int i = 0; i < productList.Count; i+=3)
+	{
+		
+		
+
+		<div class="card-deck mb-3 text-center d-flex justify-content-around">
+			
+			
+			@for (int j = 0; j < 3; j += 1)
+			{
+				if (i + j < productList.Count)
+				{
+					var product = productList[i + j];
+					<a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit;">
+					<div class="card homeCard" >
+						<img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
+						<div class="card-body">
+							<h3 class="card-title">@product.Title</h3>
+							<h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
+							<h6 class="card-text">@product.Description</h6>
+						</div>
+					</div>
+					</a>
+				}
+			}
+		</div>
+
+	}
+
+	<img class="img-fluid" style="width:100%" src="~/images/dec3.png" alt="Decoratiune">
+
+	<div class="card-deck mb-3 text-center d-flex justify-content-around">
+		<div class="card bg-transparent" style="width: 25rem; margin-top:15px; text-align: center;">
+			<img src="~/images/dec4.png" style="height:100%" alt="...">
+		</div>
+		<div class="card bg-transparent" style="width: 25rem; margin-top:15px; text-align: center;">
+			<img src="~/images/laptop.png" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+		<div class="card bg-transparent" style="width: 25rem; margin-top:15px; text-align: center;">
+			<img src="~/images/laptop.png" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
+
+
 

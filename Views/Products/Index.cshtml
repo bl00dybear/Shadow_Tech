@@ -1,5 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Shadow_Tech.Models.Product>
+
 @{
+    ViewData["Title"] = "Product List";
 }
+
+<h1>Product List</h1>
+
+<div class="row">
+	@{
+		var productList = Model?.ToList() ?? new List<Product>();
+	}
+    @for (int i = 0; i < productList.Count; i += 3)
+    {
+        <div class="card-deck mb-3 text-center d-flex justify-content-around">
+            @for (int j = 0; j < 3; j += 1)
+            {
+                if (i + j < productList.Count)
+                {
+                    var product = productList[i + j];
+
+                    <!-- Adaugă link către pagina ShowProduct -->
+                    <a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit;">
+                        <div class="card homeCard">
+                            <img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
+                            <div class="card-body">
+                                <h3 class="card-title">@product.Title</h3>
+                                <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
+                                <h6 class="card-text">@product.Description</h6>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+    }
+
+</div>
