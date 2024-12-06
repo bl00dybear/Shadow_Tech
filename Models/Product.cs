@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shadow_Tech.Models
 {
     public class Product
     {
+        [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Titlul este obligatoriu")]
+        [StringLength(512, ErrorMessage = "Titlul nu poate avea mai mult de 512 caractere")]
+        [MinLength(3, ErrorMessage = "Titlul trebuie sa aiba mai mult de 3 caractere")]
         public string? Title { get; set; }
+        [Required(ErrorMessage = "Descrierea produsului este obligatorie")]
         public string? Description { get; set; }
         [Precision(18, 2)]
         public decimal Price { get; set; }
@@ -22,5 +29,8 @@ namespace Shadow_Tech.Models
         public virtual ICollection<OrderProduct>? OrderProduct { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem>? Categ { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem>? Rev {  get; set; }
+
     }
 }
