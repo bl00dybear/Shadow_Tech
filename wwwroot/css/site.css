@@ -31,6 +31,30 @@ html {
     min-height: 100%;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #7d4e72;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Brave;
+}
+
+header a {
+    padding: 24px 50px;
+    font-size: 3rem;
+    text-decoration: none;
+    color: #7d4e72;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+header a:hover {
+    background-color: #71648b;
+    color: #fff;
+}
+
 body {
     color: #ef4f7b;
     font-family: Riseria, sans-serif;
@@ -133,32 +157,20 @@ body {
     border-radius: 10px;
 }*/
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    color: #7d4e72;
-    /*background-color: #f8f9fa;*/ /* Culoarea de fundal a antetului */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Umbra antetului */
-    font-family:Brave;
-}
 
-header a {
-    padding: 24px 50px; /* Mărește spațiul interior (vertical x orizontal) */
-    font-size: 3rem;
-    text-decoration: none;
-    color: #7d4e72;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius:5px;
-}
 
-header a:hover {
-    background-color: #71648b;
-    color: #fff;
+.homeCard {
+    width: 23rem;
+    margin-top: 15px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    border-color: #7a3a84;
+    margin-left: 25px;
+    color: #7a3a84;
+    box-shadow: 8px 8px 10px #f15178;
 }
-
-/*footer{
-    width:10vw;*/
-/*    padding: 10px 20px;*/
-/*}*/
+.homeCard img{
+    margin-top:9px;
+    align-self:center;
+}
