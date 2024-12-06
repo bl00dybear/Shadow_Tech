@@ -32,11 +32,12 @@ namespace Shadow_Tech.Controllers
 					Price = price,
 					Quantity = quantity
 				});
-			}
+                _logger.LogInformation($"Adding to cart: {productId}, {name}, {price}");
+            }
 
 			HttpContext.Session.SetObjectAsJson(CartSessionKey, cart);
 
-			return RedirectToAction("Index");
+			return RedirectToAction("Index", "Products");
 		}
 
 		public IActionResult RemoveFromCart(int productId)
@@ -50,14 +51,14 @@ namespace Shadow_Tech.Controllers
 			}
 
 			HttpContext.Session.SetObjectAsJson(CartSessionKey,cart);
-			
-			return RedirectToAction("Index");
-		}
+
+            return RedirectToAction("Index", "Products");
+        }
 
 		public IActionResult ClearCart()
 		{
 			HttpContext.Session.SetObjectAsJson(CartSessionKey, new List<CartItem>());
-			return RedirectToAction("Index");
-		}
+            return RedirectToAction("Index", "Products");
+        }
 	}
 }
