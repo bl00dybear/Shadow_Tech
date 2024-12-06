@@ -30,7 +30,7 @@
 				if (i + j < productList.Count)
 				{
 					var product = productList[i + j];
-
+					<a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit;">
 					<div class="card homeCard" >
 						<img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
 						<div class="card-body">
@@ -39,6 +39,7 @@
 							<h6 class="card-text">@product.Description</h6>
 						</div>
 					</div>
+					</a>
 				}
 			}
 		</div>
