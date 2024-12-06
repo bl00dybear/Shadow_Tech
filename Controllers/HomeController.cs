@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shadow_Tech.Data;
 using Shadow_Tech.Models;
@@ -24,7 +24,8 @@ namespace Shadow_Tech.Controllers
             //              select product;
 
             //ViewBag.Products = products;
-
+            Debug.WriteLine("Acesta este un mesaj de debug.");
+            Console.WriteLine("Mesaj de debug simplu.");
             var products = db.Products.Include(p => p.Category).ToList();
             return View(products);
         }
