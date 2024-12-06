@@ -6,45 +6,35 @@
 
 <h1>Product List</h1>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Photo</th>
-            <th>Category</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model)
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card" style="width: 18rem; border: 1px solid #ddd; padding: 10px; text-align: center;">
+                <!-- Afișează poza produsului -->
+                @if (!string.IsNullOrEmpty(product.Photo))
+                {
+                    <img src="@product.Photo" class="card-img-top" alt="Product Image" style="max-height: 150px; object-fit: contain; margin-bottom: 10px;" />
+                }
+                else
+                {
+                    <img src="/images/default.jpg" class="card-img-top" alt="Default Image" style="max-height: 150px; object-fit: contain; margin-bottom: 10px;" />
+                }
+
+                <!-- Titlul produsului -->
+                <div class="card-body">
+                    <h5 class="card-title">@product.Title</h5>
+
+                    <!-- Prețul produsului -->
+                    <p class="card-text" style="font-size: 1.2em; color: #333;">
+                        @product.Price.ToString() Lei
+                    </p>
+                </div>
+            </div>
+        </div>
+        @if ((Model.ToList().IndexOf(product) + 1) % 3 == 0)
         {
-            <tr>
-                <td>@product.Id</td>
-                <td>@product.Title</td>
-                <td>@product.Description</td>
-                <td>@product.Price.ToString("C")</td>
-                <td>@product.Stock</td>
-                <td>
-                    @if (!string.IsNullOrEmpty(product.Photo))
-                    {
-                        <img src="@product.Photo" alt="Product Image" style="max-width:100px; max-height:100px;" />
-                    }
-                    else
-                    {
-                        <span>No Image</span>
-                    }
-                </td>
-                <td>@product.Category?.Name</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary">Edit</a>
-                    <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-info">Details</a>
-                    <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+            <div class="clearfix d-none d-md-block"></div>
         }
-    </tbody>
-</table>
+    }
+</div>

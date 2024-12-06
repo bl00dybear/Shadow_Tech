@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shadow_Tech.Models
 {
@@ -18,5 +20,7 @@ namespace Shadow_Tech.Models
         public virtual ApplicationUser? User { get; set; }
         public ICollection<Review>? Reviews { get; set; }
         public virtual ICollection<OrderProduct>? OrderProduct { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem>? Categ { get; set; }
     }
 }
