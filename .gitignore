@@ -29,3 +29,8 @@ packages/
 
 # Specific to your project
 src/Data/temp.txt
+
+appsettings.json
+appsettings.json
+Properties/serviceDependencies.json
+Properties/serviceDependencies.local.json
