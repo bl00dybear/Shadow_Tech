@@ -161,7 +161,7 @@ body {
 
 .homeCard {
     width: 23rem;
-    margin-top: 15px;
+    margin-top: 20px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
@@ -171,6 +171,6 @@ body {
     box-shadow: 8px 8px 10px #f15178;
 }
 .homeCard img{
-    margin-top:9px;
+    margin-top:15px;
     align-self:center;
 }
