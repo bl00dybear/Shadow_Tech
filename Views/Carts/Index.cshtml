@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model List<CartItem>
+
+<h1>Cart</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.TotalPrice.ToString("C")</td>
+                    <td>
+                        <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-danger btn-sm">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="ClearCart" class="btn btn-warning">Clear Cart</a>
+    <a href="/Checkout" class="btn btn-success">Checkout</a>
 }
