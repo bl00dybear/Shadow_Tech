@@ -69,6 +69,35 @@ namespace Shadow_Tech.Controllers
 
             return View(product);
         }
+        [HttpPost]
+        public IActionResult Show(int id, int Rating, string Comment)
+        {
+            // Căutăm produsul asociat
+            var product = db.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Creăm un review nou
+            var review = new Review
+            {
+                ProductId = id,
+                Rating = Rating,
+                Comment = Comment
+            };
+
+            // Adăugăm recenzia în baza de date
+            db.Reviews.Add(review);
+            db.SaveChanges();
+
+            // Adăugăm un mesaj pentru utilizator
+            TempData["message"] = "Recenzia a fost adăugată cu succes!";
+            TempData["messageType"] = "alert-success";
+
+            // Redirecționăm înapoi la pagina Show
+            return RedirectToAction("Show", new { id });
+        }
 
 
         [NonAction]

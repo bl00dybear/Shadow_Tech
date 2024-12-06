@@ -174,3 +174,27 @@ body {
     margin-top:15px;
     align-self:center;
 }
+
+
+.rating {
+    direction: rtl;
+    font-size: 2rem;
+    unicode-bidi: bidi-override;
+    display: inline-flex;
+}
+
+    .rating input {
+        display: none; /* Ascundem input-urile radio */
+    }
+
+    .rating label {
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+    }
+
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #f5b301; /* Galben pentru stelele selectate */
+        }
