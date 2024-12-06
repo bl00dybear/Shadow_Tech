@@ -1,0 +1,15 @@
+﻿@model Shadow_Tech.Models.Product
+
+<div class="card homeCard">
+    <img src="@Model.Photo" class="card-img-center" style="width:90%" alt="...">
+</div>
+    <div class="card-body">
+        <h3 class="card-title">@Model.Title</h3>
+        <h4 class="card-text" style="color:#f15178">@Model.Price lei</h4>
+        <h6 class="card-text">@Model.Description</h6>
+    </div>
+<div>
+    <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-name="@Model.Title" asp-route-price="@Model.Price" class="btn btn-primary">Add to Cart</a>
+</div>
+<br />
+<br />

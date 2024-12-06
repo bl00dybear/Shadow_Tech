@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Shadow_Tech.Data;
 using Shadow_Tech.Models;
@@ -52,6 +53,23 @@ namespace Shadow_Tech.Controllers
                 return View(product);
             }
         }
+
+        public IActionResult Show(int id)
+        {
+            var product = db.Products
+                .Include(p => p.Category)
+                .Include(p => p.Reviews)
+                .ThenInclude(r => r.User)
+                .FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
 
         [NonAction]
         public IEnumerable<SelectListItem> GetAllCategories()
