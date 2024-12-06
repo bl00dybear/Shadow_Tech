@@ -39,12 +39,12 @@ body {
 }
 
 .firstlook {
-/*    margin-top:-10vh;*/
     display: flex;
     justify-content: center;
-/*    align-items: center;*/
-    height: 100vh; 
-/*    justify-content: space-between;*/
+    align-items:center;
+    width:100vw;
+    height:100vh;
+    max-width:100%;
 }
 
 .firstlook img {
@@ -56,13 +56,13 @@ body {
 }
 
 .dec2 {
-    /*    margin-top:-15vh;*/
+        margin-top:-15vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.cartonas {
+/*.cartonas {
     width: 35vh;
     height: 40vh;
     background-color: #2d181b;
@@ -71,16 +71,58 @@ body {
     margin-right: 25px;
     margin-top: 45px;
     box-shadow: 8px 8px 10px rgb(125,78,114);
+}*/
+
+/*.container_row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);*/ /* 3 coloane egale pentru ecrane mari */
+    /*gap: 20px;*/ /* spațiu între div-uri */
+    /*padding: 20px;*/
+    /*    height:auto;*/
+    /*width: 100%;
+    height: auto;
 }
-.img3cartonas {
-/*    width: 35vh;
-    height: 45vh;
-    border-radius: 25px;
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-top: 45px;*/
-    margin-top:45px;
-    width:100vw;
+
+.card {
+    position: relative;
+    width: 100%;
+    padding-top: 133.33%;*/ /* Proporția 3:4 (4/3 = 1.3333, deci 100% / 1.3333 = 75%) */
+    /*background-color: #f4f4f4;*/ /* Poți schimba culoarea de fundal după dorință */
+    /*border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/ /* Umbră subtile pentru cartonaș */
+    /*overflow: hidden;
+    transition: transform 0.3s ease;
+}*/
+
+    /* Stare la hover pentru cartonaș */
+    /*.card:hover {
+        transform: scale(1.05);
+    }
+
+.img_3card {
+    grid-column: span 3;
+ 
+}
+
+@media (max-width: 1000px) {
+    .container_row {
+        grid-template-columns: 1fr;*/ /* Un singur cartonaș pe linie */
+    /*}
+
+    .img_3card {
+        width: 100%; 
+        padding-top: 75%; 
+    }
+}*/
+
+
+
+/*.img_3card {
+    width: 100%;
+    padding-top: 75%;
+    object-fit: cover; 
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 .img1cartonas {
     width: 35vh;
@@ -89,7 +131,7 @@ body {
     margin-right: 25px;
     margin-top: 45px;
     border-radius: 10px;
-}
+}*/
 
 header {
     display: flex;
@@ -115,3 +157,8 @@ header a:hover {
     background-color: #71648b;
     color: #fff;
 }
+
+/*footer{
+    width:10vw;*/
+/*    padding: 10px 20px;*/
+/*}*/
