@@ -145,20 +145,31 @@ namespace Shadow_Tech.Controllers
 
             if (product != null)
             {
-                var item = new Cart
+                var item = db.Carts.FirstOrDefault(i => i.ProductId == productId);
+
+                if (item != null)
                 {
-                    ProductId = product.Id,
-                    ProductName = product.Title,
-                    Price = product.Price,
-                    UserId = 1,
-                    Quantity = 1,
-                    Photo = product.Photo
-                };
+                    item.Quantity++;
+                    db.SaveChanges();
+                    return Redirect("Show/" + product.Id);
+                }
+                else
+                {
+                    var cartItem = new Cart
+                    {
+                        ProductId = product.Id,
+                        ProductName = product.Title,
+                        Price = product.Price,
+                        UserId = 1,
+                        Quantity = 1,
+                        Photo = product.Photo
+                    };
 
-                db.Carts.Add(item);
-                db.SaveChanges();
+                    db.Carts.Add(cartItem);
+                    db.SaveChanges();
 
-                return Redirect("Show/"+product.Id);
+                    return Redirect("Show/" + product.Id);
+                }
             }
             else
             {
