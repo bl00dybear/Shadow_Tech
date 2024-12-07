@@ -12,20 +12,14 @@ namespace Shadow_Tech.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext db;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        public ProductsController(
-        ApplicationDbContext context,
-        UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager
-        )
+        private readonly ApplicationDbContext? db;
+        private readonly ILogger<HomeController> _logger;
+
+        public ProductsController(ILogger<HomeController> logger,ApplicationDbContext context)
         {
             db = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
+            _logger = logger;
         }
-        [AllowAnonymous]
         public IActionResult Index()
         {
             var products = db.Products.Include("Category").ToList();
@@ -65,7 +59,7 @@ namespace Shadow_Tech.Controllers
             var product = db.Products
                 .Include(p => p.Category)
                 .Include(p => p.Reviews)
-                .Include(r => r.User)
+                .ThenInclude(r => r.User)
                 .FirstOrDefault(p => p.Id == id);
 
             if (product == null)
