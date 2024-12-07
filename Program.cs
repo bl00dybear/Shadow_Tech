@@ -39,7 +39,7 @@ else
     app.UseHsts();
 }
 
-app.UseSession();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -47,6 +47,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

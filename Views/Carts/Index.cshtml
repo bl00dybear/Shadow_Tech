@@ -1,39 +1,45 @@
-﻿@model List<CartItem>
+﻿@model IEnumerable<Shadow_Tech.Models.Cart>
 
-<h1>Cart</h1>
+<h1>Coșul tău de cumpărături</h1>
 
-@if (Model == null || !Model.Any())
-{
-    <p>Your cart is empty.</p>
-}
-else
+@if (Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th>Produs</th>
+                <th>Preț</th>
+                <th>Cantitate</th>
                 <th>Total</th>
-                <th>Actions</th>
+                <th>Acțiuni</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
+               
                 <tr>
+                    <img src="@item.Photo" />
                     <td>@item.ProductName</td>
-                    <td>@item.Price.ToString("C")</td>
+                    <td>@item.Price RON</td>
                     <td>@item.Quantity</td>
-                    <td>@item.TotalPrice.ToString("C")</td>
+                    <td>@(item.Price * item.Quantity) RON</td>
                     <td>
-                        <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-danger btn-sm">Remove</a>
+                        <form method="post" asp-controller="Carts" asp-action="RemoveFromCart" asp-route-id="@item.Id">
+							<button class="btn btn-danger">Șterge</button>"
+                        </form>
+
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
-    <a asp-action="ClearCart" class="btn btn-warning">Clear Cart</a>
-    <a href="/Checkout" class="btn btn-success">Checkout</a>
+    <h3>Total: @ViewBag.CartTotal RON</h3>
+    <button class="btn btn-warning" onclick="clearCart()">Golește coșul</button>
 }
+else
+{
+    <p>Coșul tău este gol.</p>
+}
+
+

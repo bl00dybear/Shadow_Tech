@@ -136,6 +136,37 @@ namespace Shadow_Tech.Controllers
             // returnam lista de categorii
             return selectList;
         }
+
+        [HttpPost]
+        public IActionResult AddToCart(int productId)
+        {
+            //Console.WriteLine("Am adaugat produsul cu id-ul: " + i);
+            var product = db.Products.FirstOrDefault(p => p.Id == productId);
+
+            if (product != null)
+            {
+                var item = new Cart
+                {
+                    ProductId = product.Id,
+                    ProductName = product.Title,
+                    Price = product.Price,
+                    UserId = 1,
+                    Quantity = 1,
+                    Photo = product.Photo
+                };
+
+                db.Carts.Add(item);
+                db.SaveChanges();
+
+                return Redirect("Show/"+product.Id);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            
+        }
     
     }
 }
