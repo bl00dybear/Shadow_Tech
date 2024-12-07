@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shadow_Tech.Models
 {
@@ -6,7 +7,8 @@ namespace Shadow_Tech.Models
 	{
         public int Id { get; set; }
         public int ProductId { get; set; }
-		public string ProductName { get; set; }
+		[Required]
+		public string? ProductName { get; set; }
 		[Precision(18, 2)]
 		public decimal Price { get; set; }
 		public int Quantity {  get; set; }
