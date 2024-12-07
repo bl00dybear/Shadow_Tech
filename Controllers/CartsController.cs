@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shadow_Tech.Data;
 using Shadow_Tech.Models;
@@ -12,17 +11,9 @@ namespace Shadow_Tech.Controllers
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext db;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        public CartsController(
-        ApplicationDbContext context,
-        UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager
-        )
+        public CartsController(ApplicationDbContext context)
         {
             db = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
