@@ -157,33 +157,7 @@ body {
     border-radius: 10px;
 }*/
 
-.productCard {
-    width:35rem;
-    height:35rem;
-    margin-top: 20px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    border-color: #7a3a84;
-/*    margin-left: 25px;*/
-    color: #7a3a84;
-    box-shadow: 8px 8px 10px #f15178;
-/*    margin-left:10px;
-    margin-right:10px;*/
-}
 
-.productCardOneLine {
-    width: 80rem;
-    margin-top: 20px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    border-color: #7a3a84;
-/*    margin-left: 10px;
-    margin-right: 10px;*/
-    color: #7a3a84;
-    box-shadow: 8px 8px 10px #f15178;
-}
 
 .homeCard {
     width: 23rem;
@@ -209,35 +183,18 @@ body {
     display: inline-flex;
 }
 
-.rating input {
-    display: none; /* Ascundem input-urile radio */
-}
+    .rating input {
+        display: none; /* Ascundem input-urile radio */
+    }
 
-.rating label {
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
-}
+    .rating label {
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+    }
 
-.rating input:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
-    color: #f5b301; /* Galben pentru stelele selectate */
-}
-
-/*.gradient-custom {*/
-    /* fallback for old browsers */
-    /*background: #6a11cb;*/
-    /* Chrome 10-25, Safari 5.1-6 */
-    /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));*/
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /*background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-}*/
-
-.stil {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    border-color: #7a3a84;
-    color: #7a3a84;
-    box-shadow: 8px 8px 10px #f15178;
-}
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #f5b301; /* Galben pentru stelele selectate */
+        }

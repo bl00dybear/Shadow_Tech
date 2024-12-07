@@ -1,65 +1,66 @@
 ﻿@model Shadow_Tech.Models.Product
-
-<section class="py-5">
-            <div class="container px-4 px-lg-5 my-5 stil">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.Photo" alt="..." /></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
-                        <h1 class="display-5 fw-bolder">@Model.Title</h1>
-                        <div class="fs-5 mb-5">
-                            <span>@Model.Price lei</span>
-                        </div>
-                        <p class="lead">@Model.Description</p>
-                        <div class="d-flex">
-                            <form method="post" asp-controller="Products" asp-action="AddToCart">
-		                    <input type="hidden" name="productId" value="@Model.Id" />
-		                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Adauga in cos</button>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="col-sm-7 text-center stil">
-            <h3>Posteaza un Review</h3>
-
-            <form method="post" asp-controller="Products" asp-action="Show">
-
-                <div class="card-body">
-
-                    <input type="hidden" name="ProductId" value="@Model.Id" />
-
-                    <label>Continut Review</label>
-                    <br />
-
-                    <textarea class="form-control" name="Comment"></textarea>
-
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                    <label>Lasa-ne si o nota</label>
-                    <div class="rating">
-                        <input type="radio" id="star5" name="Rating" value="5" />
-                        <label for="star5" title="5 stele">☆</label>
-
-                        <input type="radio" id="star4" name="Rating" value="4" />
-                        <label for="star4" title="4 stele">☆</label>
-
-                        <input type="radio" id="star3" name="Rating" value="3" />
-                        <label for="star3" title="3 stele">☆</label>
-
-                        <input type="radio" id="star2" name="Rating" value="2" />
-                        <label for="star2" title="2 stele">☆</label>
-
-                        <input type="radio" id="star1" name="Rating" value="1" />
-                        <label for="star1" title="1 stea">☆</label>
-                    </div>
-
-                    <br /><br />
-                    <button class="btn btn-success" type="submit">Adauga Review-ul</button>
-
-                </div>
-
-            </form>
+<br />
+<br />
+<div class="row">
+    <div class="col-sm-4 ">
+        <div class="card homeCard">
+            <img src="@Model.Photo" class="card-img-center" style="width:90%" alt="...">
         </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7 text-center ">
+        <h3>Posteaza un Review</h3>
+        <form method="post" asp-controller="Products" asp-action="Show">
+
+            <div class="card-body">
+
+                <input type="hidden" name="ProductId" value="@Model.Id" />
+
+                <label>Continut Review</label>
+                <br />
+
+                <textarea class="form-control" name="Comment"></textarea>
+
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <label>Lasa-ne si o nota</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="Rating" value="5" />
+                    <label for="star5" title="5 stele">☆</label>
+
+                    <input type="radio" id="star4" name="Rating" value="4" />
+                    <label for="star4" title="4 stele">☆</label>
+
+                    <input type="radio" id="star3" name="Rating" value="3" />
+                    <label for="star3" title="3 stele">☆</label>
+
+                    <input type="radio" id="star2" name="Rating" value="2" />
+                    <label for="star2" title="2 stele">☆</label>
+
+                    <input type="radio" id="star1" name="Rating" value="1" />
+                    <label for="star1" title="1 stea">☆</label>
+                </div>
+
+                <br /><br />
+                <button class="btn btn-success" type="submit">Adauga Review-ul</button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+    <div class="card-body">
+        <h3 class="card-title">@Model.Title</h3>
+        <h4 class="card-text" style="color:#f15178">@Model.Price lei</h4>
+        <h6 class="card-text">@Model.Description</h6>
+    </div>
+<div>
+    <form method="post" asp-controller="Products" asp-action="AddToCart">
+		<input type="hidden" name="productId" value="@Model.Id" />
+		
+        <button class="btn btn-primary" type="submit">Adauga in cos</button>
+    </form>
+</div>
+<br />
+<br />
