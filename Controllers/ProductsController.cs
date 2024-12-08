@@ -29,6 +29,7 @@ namespace Shadow_Tech.Controllers
         public IActionResult Index()
         {
             var products = db.Products.Include("Category").Where(prod => prod.Listed == true).ToList();
+            SetAccessRights();
             //ViewBag.Products = products;
 
             return View(products);
@@ -167,7 +168,43 @@ namespace Shadow_Tech.Controllers
             }
             return View();
         }
+        public ActionResult Delete(int id)
+        {
+            // Article article = db.Articles.Find(id);
 
+            Product product = db.Products.Include("Category")
+                                         .Where(prod => prod.Id == id)
+                                         .First();
+
+            if ( User.IsInRole("Admin"))
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+                TempData["message"] = "Produsul a fost sters";
+                TempData["messageType"] = "alert-success";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti dreptul sa stergeti un articol care nu va apartine";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+        }
+
+        private void SetAccessRights()
+        {
+            ViewBag.AfisareButoane = false;
+
+            if (User.IsInRole("Contribuitor"))
+            {
+                ViewBag.AfisareButoane = true;
+            }
+
+            ViewBag.UserCurent = _userManager.GetUserId(User);
+
+            ViewBag.EsteAdmin = User.IsInRole("Admin");
+        }
 
         [NonAction]
         public IEnumerable<SelectListItem> GetAllCategories()
