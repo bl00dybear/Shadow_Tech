@@ -61,6 +61,7 @@ namespace Shadow_Tech.Controllers
             Cart cart = db.Carts.Where(ci => ci.Id == id).First();
             cart.Quantity++;
             db.SaveChanges();
+            ViewBag.CartTotal = TotalCart(id);
 
             return RedirectToAction("Index");
         }
@@ -71,8 +72,27 @@ namespace Shadow_Tech.Controllers
             Cart cart = db.Carts.Where(ci => ci.Id == id).First();
             cart.Quantity--;
             db.SaveChanges();
+            ViewBag.CartTotal=TotalCart(id);
+
+
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public decimal TotalCart(int id)
+        {
+            Cart cart = db.Carts.Where(ci => ci.Id == id).First();
+
+            //Console.WriteLine("aici");
+
+            int userId = cart.UserId;
+            decimal totalSum = db.Carts
+                .Where(ci => ci.UserId == userId)
+                .Sum(ci => ci.Price*ci.Quantity);
+            //ViewBag.CartTotal = totalSum;
+
+            return totalSum;
         }
     }
 }
