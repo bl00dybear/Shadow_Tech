@@ -1,7 +1,7 @@
 ﻿@model Shadow_Tech.Models.Product
 
 
-<h2 class="text-center mt-5">Adaugare Produs</h2>
+<h2 class="text-center mt-5">Editare Produs</h2>
 
 <br />
 
@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-6 offset-3">
 
-            <form method="post" asp-action="New" asp-controller="Products">
+            <form method="post" asp-action="Edit" asp-controller="Products">
 
                 <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label asp-for="Description" class="form-label">Descrierea Produsului</label>
                     <br />
-                    <textarea asp-for="Description" class="form-control" ><</textarea>
+                    <textarea asp-for="Description" class="form-control"><</textarea>
 
                     <span asp-validation-for="Description" class="text-danger"></span>
 
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label asp-for="Photo" class="form-label">Poza Produs (URL)</label>
                     <br />
-                    <textarea asp-for="Photo" class="form-control" ></textarea>
+                    <textarea asp-for="Photo" class="form-control"></textarea>
 
                     <span asp-validation-for="Photo" class="text-danger"></span>
 
@@ -70,9 +70,9 @@
 
                     <br />
                 </div>
-                
+
                 <br />
-                <button class="btn btn-success" type="submit">Adauga produs</button>
+                <button class="btn btn-success" type="submit">Modifica Produs</button>
 
             </form>
         </div>
