@@ -241,3 +241,12 @@ body {
     color: #7a3a84;
     box-shadow: 8px 8px 10px #f15178;
 }
+
+.stilButton {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    border-color: #7a3a84;
+    color: #7a3a84;
+    margin-left: 8px;
+    margin-right: 8px;
+}

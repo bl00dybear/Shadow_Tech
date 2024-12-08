@@ -54,5 +54,25 @@ namespace Shadow_Tech.Controllers
 
             return Json(new { success = true, message = "Coșul a fost golit!" });
         }
+
+        [HttpPost]
+        public IActionResult IncrementQuantity(int id)
+        {
+            Cart cart = db.Carts.Where(ci => ci.Id == id).First();
+            cart.Quantity++;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DecrementQuantity(int id)
+        {
+            Cart cart = db.Carts.Where(ci => ci.Id == id).First();
+            cart.Quantity--;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
