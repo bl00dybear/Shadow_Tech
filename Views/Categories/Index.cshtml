@@ -31,8 +31,11 @@
                     </div>
                     <footer class="bg-body-light d-flex justify-content-center" >
                         <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Products" asp-action="Index" asp-route-id="@categoryList[i].Id">Show Products</a>
+                        
+                        @if(ViewBag.EsteAdmin){
                         <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Categories" asp-action="Edit" asp-route-id="@categoryList[i].Id">Edit Category</a>
-                    </footer>
+                        <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Categories" asp-action="Delete" asp-route-id="@categoryList[i].Id">Delete Category</a>
+                   } </footer>
                 </section>
             </div>
             
@@ -41,10 +44,7 @@
     </div>
 </div>
 
-@foreach (var category in ViewBag.Categories)
-{
-   
-}
+
 <br />
 <a class="btn btn-success" asp-controller="Categories" asp-action="New">Adauga o noua categorie</a>
 <br />

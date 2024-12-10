@@ -25,7 +25,7 @@ namespace Shadow_Tech.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        [Authorize(Roles = "User, Admin, Contributors")]
+        [Authorize(Roles = "Contribuitor,Admin,User")]
         public IActionResult Index()
         {
             var cartItems = db.Carts.Where(i => i.UserId == 1).ToList();

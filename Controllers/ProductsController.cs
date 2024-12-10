@@ -174,7 +174,7 @@ namespace Shadow_Tech.Controllers
                 requestProduct.Categ = GetAllCategories();
                 return View(requestProduct);
             }
-            return View();
+            
         }
         public ActionResult Delete(int id)
         {
