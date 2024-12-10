@@ -81,7 +81,7 @@ namespace Shadow_Tech.Controllers
                 .Include(p => p.Reviews)
                 .Include(r => r.User)
                 .FirstOrDefault(p => p.Id == id);
-
+            SetAccessRights();
             if (product == null)
             {
                 return NotFound();
@@ -92,14 +92,12 @@ namespace Shadow_Tech.Controllers
         [HttpPost]
         public IActionResult Show(int id, int Rating, string Comment)
         {
-            // Căutăm produsul asociat
             var product = db.Products.FirstOrDefault(p => p.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            // Creăm un review nou
             var review = new Review
             {
                 ProductId = id,
@@ -107,15 +105,12 @@ namespace Shadow_Tech.Controllers
                 Comment = Comment
             };
 
-            // Adăugăm recenzia în baza de date
             db.Reviews.Add(review);
             db.SaveChanges();
 
-            // Adăugăm un mesaj pentru utilizator
             TempData["message"] = "Recenzia a fost adăugată cu succes!";
             TempData["messageType"] = "alert-success";
 
-            // Redirecționăm înapoi la pagina Show
             return RedirectToAction("Show", new { id });
         }
 
@@ -138,7 +133,7 @@ namespace Shadow_Tech.Controllers
             else
             {
 
-                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine";
+                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui produs care nu va apartine";
                 TempData["messageType"] = "alert-danger";
                 return RedirectToAction("Index");
             }
@@ -148,7 +143,10 @@ namespace Shadow_Tech.Controllers
         public IActionResult Edit(int id, Product requestProduct)
         {
             Product product = db.Products.Find(id);
-
+            if (product == null)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 if (product.UserId == _userManager.GetUserId(User) || User.IsInRole("Admin")) {
@@ -157,14 +155,18 @@ namespace Shadow_Tech.Controllers
                     product.Price = requestProduct.Price;
                     product.CategoryId = requestProduct.CategoryId;
                     product.Photo = requestProduct.Photo;
-                    TempData["message"] = "Articolul a fost modificat";
+                    if (User.IsInRole("Admin"))
+                        product.Listed = true;
+                    else
+                        product.Listed = false;
+                    TempData["message"] = "Produsul a fost modificat";
                     TempData["messageType"] = "alert-success";
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine";
+                    TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui produs care nu va apartine";
                     TempData["messageType"] = "alert-danger";
                     return RedirectToAction("Index");
                 }
@@ -176,9 +178,72 @@ namespace Shadow_Tech.Controllers
             }
 
         }
+        [Authorize(Roles = "Contribuitor,Admin")]
+        public IActionResult EditAdmin(int id)
+        {
+
+            Product product = db.Products.Include("Category")
+                                         .Where(art => art.Id == id)
+                                         .First();
+
+            product.Categ = GetAllCategories();
+
+            if ((product.UserId == _userManager.GetUserId(User)) ||
+                User.IsInRole("Admin"))
+            {
+                return View(product);
+            }
+            else
+            {
+
+                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui produs care nu va apartine";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("ValidateProducts");
+            }
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult EditAdmin(int id, Product requestProduct)
+        {
+            Product product = db.Products.Find(id);
+
+            if (product == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (product.UserId == _userManager.GetUserId(User) || User.IsInRole("Admin"))
+                {
+                    product.Title = requestProduct.Title;
+                    product.Description = requestProduct.Description;
+                    product.Price = requestProduct.Price;
+                    product.CategoryId = requestProduct.CategoryId;
+                    product.Photo = requestProduct.Photo;
+                    TempData["message"] = "Produsul a fost modificat";
+                    TempData["messageType"] = "alert-success";
+                    db.SaveChanges();
+                    return RedirectToAction("ValidateProducts");
+                }
+                else
+                {
+                    TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui produs care nu va apartine";
+                    TempData["messageType"] = "alert-danger";
+                    return RedirectToAction("ValidateProducts");
+                }
+            }
+            else
+            {
+                requestProduct.Categ = GetAllCategories();
+                return View(requestProduct);
+            }
+
+        }
+        [Authorize(Roles = "Contribuitor,Admin")]
         public IActionResult Delete(int id)
         {
-            // Article article = db.Articles.Find(id);
+            
 
             Product product = db.Products.Include("Category")
                                          .Where(prod => prod.Id == id)
@@ -194,11 +259,36 @@ namespace Shadow_Tech.Controllers
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa stergeti un articol care nu va apartine";
+                TempData["message"] = "Nu aveti dreptul sa stergeti un produs care nu va apartine";
                 TempData["messageType"] = "alert-danger";
                 return RedirectToAction("Index");
             }
         }
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteAdmin(int id)
+        {
+            
+
+            Product product = db.Products.Include("Category")
+                                         .Where(prod => prod.Id == id)
+                                         .First();
+
+            if (User.IsInRole("Admin"))
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+                TempData["message"] = "Produsul a fost sters";
+                TempData["messageType"] = "alert-success";
+                return RedirectToAction("ValidateProducts");
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti dreptul sa stergeti un produs care nu va apartine";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("ValidateProducts");
+            }
+        }
+        [Authorize(Roles = "Admin")]
         public IActionResult ValidateProducts()
         {
             var products = db.Products
@@ -213,20 +303,17 @@ namespace Shadow_Tech.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Validate(int id)
         {
-            // Find the product by its ID
             Product product = db.Products.Find(id);
 
             if (product != null)
             {
-                // Set the product as listed
                 product.Listed = true;
 
-                // Save changes to the database
                 db.SaveChanges();
 
-                // Provide feedback
                 TempData["message"] = "Produsul a fost validat.";
                 TempData["messageType"] = "alert-success";
             }
@@ -236,7 +323,6 @@ namespace Shadow_Tech.Controllers
                 TempData["messageType"] = "alert-danger";
             }
 
-            // Redirect to the same page (or specify another action if needed)
             return RedirectToAction("ValidateProducts");
         }
 
@@ -257,44 +343,27 @@ namespace Shadow_Tech.Controllers
         [NonAction]
         public IEnumerable<SelectListItem> GetAllCategories()
         {
-            // generam o lista de tipul SelectListItem fara elemente
             var selectList = new List<SelectListItem>();
 
-            // extragem toate categoriile din baza de date
             var categories = from cat in db.Categories
                              select cat;
 
-            // iteram prin categorii
             foreach (var category in categories)
             {
-                // adaugam in lista elementele necesare pentru dropdown
-                // id-ul categoriei si denumirea acesteia
+ 
                 selectList.Add(new SelectListItem
                 {
                     Value = category.Id.ToString(),
                     Text = category.Name
                 });
             }
-            /* Sau se poate implementa astfel: 
-             * 
-            foreach (var category in categories)
-            {
-                var listItem = new SelectListItem();
-                listItem.Value = category.Id.ToString();
-                listItem.Text = category.CategoryName;
 
-                selectList.Add(listItem);
-             }*/
-
-
-            // returnam lista de categorii
             return selectList;
         }
 
         [HttpPost]
         public IActionResult AddToCart(int productId)
         {
-            //Console.WriteLine("Am adaugat produsul cu id-ul: " + i);
             var product = db.Products.FirstOrDefault(p => p.Id == productId);
 
             if (product != null)

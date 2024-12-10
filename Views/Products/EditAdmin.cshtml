@@ -1,0 +1,81 @@
+﻿
+@model Shadow_Tech.Models.Product
+
+
+<h2 class="text-center mt-5">Editare Produs</h2>
+
+<br />
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-3">
+
+            <form method="post" asp-action="EditAdmin" asp-controller="Products">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Title" class="form-label">Titlu Produs</label>
+                    <br />
+                    <input asp-for="Title" class="form-control" />
+
+                    <span asp-validation-for="Title" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="form-label">Descrierea Produsului</label>
+                    <br />
+                    <textarea asp-for="Description" class="form-control"><</textarea>
+
+                    <span asp-validation-for="Description" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="form-label">Pret Produs</label>
+                    <br />
+                    <input asp-for="Price" class="form-control" />
+
+                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Stock" class="form-label">Stoc Produs</label>
+                    <br />
+                    <input asp-for="Stock" class="form-control" />
+
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo" class="form-label">Poza Produs (URL)</label>
+                    <br />
+                    <textarea asp-for="Photo" class="form-control"></textarea>
+
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+                <div class="form-group">
+                    <label for="CategoryId">Selectati categoria</label>
+                    <br />
+                    <select asp-for="CategoryId" asp-items="Model.Categ" class="form-control">
+                        <option value="">Selectati categoria</option>
+                    </select>
+
+                    <!-- Mesaj de validare pentru CategoryId -->
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+
+                    <br />
+                </div>
+
+                <br />
+                <button class="btn btn-success" type="submit">Modifica Produs</button>
+
+            </form>
+        </div>
+    </div>
+</div>
