@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Lista categorii";
+    ViewBag.Title = "Category List";
+    var categoryList = ViewBag?.Categories?? new List<Category>();
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,26 +12,43 @@
 }
 
 <br />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        @for(int i=0; i < categoryList.Count; i += 1)
+        {
+            <div class="col-md-6 margin-20px-bottom" >
+                <section class="widget stil" style="margin-left:10px; margin-right:10px;margin-bottom:40px;">
+                    <div class="widget-body">
+                        <div class="widget-top-overflow text-white">
+                            <img src="https://www.bootdey.com/image/800x400/87CEFA/000000">
+                            
+                        </div>
+                        <div class="post-user mt-sm">
+                            
+                            <h3 class="mb-xs mt-xs">@categoryList[i].Name</h3>
+                            @categoryList[i].ProductCount produse
+                        </div>
+                        <p class="text-light fs-mini m">
+                            Lots of cool stuff is happening around you. Just calm down for a sec and listen. Colors, sounds,
+                            thoughts, ideas.
+                        </p>
+                    </div>
+                    <footer class="bg-body-light d-flex justify-content-center" >
+                        <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Products" asp-action="Index" asp-route-id="@categoryList[i].Id+1">Show Products</a>
+                        <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Categories" asp-action="Edit" asp-route-id="@categoryList[i].Id">Edit Category</a>
+                    </footer>
+                </section>
+            </div>
+            
+        }
+        
+    </div>
+</div>
 
 @foreach (var category in ViewBag.Categories)
 {
-    <div class="col-lg-3 sm-margin-30px-bottom">
-        <div class="h-100">
-            <a href="#" class="card bg-img box-hover cover-background border-0 p-4 h-100">
-                <div class="mt-auto position-relative z-index-9">
-                    <label class="form-label">@category.Name</label>
-                    <div class="position-relative z-index-9 text-white opacity6">
-                        @category.ProductCount produse
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <br />
-    <a class="btn alert-success" asp-controller="Products" asp-action="Index" asp-route-id="@category.Id+1">Afisare categorie</a>
-    <a class="btn alert-success" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id">Editare categorie</a>
-    <br />
-    <br />
+   
 }
 <br />
 <a class="btn btn-success" asp-controller="Categories" asp-action="New">Adauga o noua categorie</a>
