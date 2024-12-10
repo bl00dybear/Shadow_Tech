@@ -421,3 +421,33 @@ body {
 /*    background: rgba(0,0,0,0.8);*/
 /*    display: none;*/
 }
+
+button.custom-link{
+    color: #7d4e72;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+button.custom-link:hover {
+    color: #fff;
+    background-color: #7d4e72;
+    border-color: #7d4e72;
+}
+
+a.custom-link {
+    color: #7d4e72; 
+    background-color: transparent;
+    text-decoration: none; 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    transition: all 0.3s ease; 
+}
+
+a.custom-link:hover {
+    color: #fff;
+    background-color: #7d4e72; 
+    border-color: #7d4e72;
+}
