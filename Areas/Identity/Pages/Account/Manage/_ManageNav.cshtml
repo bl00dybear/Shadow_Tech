@@ -18,9 +18,9 @@
     @if (User.IsInRole("Admin"))
 	{
         <li class="nav-item"><a class="nav-link custom-link" asp-controller="Products" asp-action="ValidateProducts">Validate products</a></li>
-        <li class="nav-item"><a class="nav-link custom-link" asp-area="" asp-controller="Users" asp-action="Index">View Users</a></li>
-        <li class="nav-item"><a class="nav-link custom-link" asp-controller="Products" asp-action="ValidateProducts">View Categories</a></li>
-        <li class="nav-item"><a class="nav-link custom-link" asp-controller="Products" asp-action="ValidateProducts">View Users</a></li>
+        <li class="nav-item"><a class="nav-link custom-link" asp-controller="Users" asp-action="Index">View Users</a></li>
+        <li class="nav-item"><a class="nav-link custom-link" asp-controller="Categories" asp-action="Index">View Categories</a></li>
+        <li class="nav-item"><a class="nav-link custom-link" asp-controller="Products" asp-action="Index">View Products</a></li>
 	}
 
    
