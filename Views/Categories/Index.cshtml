@@ -1,70 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewBag.Title = "Lista categorii";
 }
-<section>
-    <div class="container">
-        <div class="text-center margin-40px-bottom">
-            <h3 class="no-margin-bottom">Top Job Categories</h3>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 sm-margin-30px-bottom">
-                <div class="h-100">
-                    <a href="#" class="card bg-img box-hover cover-background border-0 p-4 h-100" style="background-image: url(https://www.bootdey.com/image/300x232/87CEFA/000000);">
-                        <div class="mt-auto position-relative z-index-9">
-                            <h5 class="text-white">HealthCare</h5>
-                            <div class="position-relative z-index-9 text-white opacity6">120 jobs</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="row margin-30px-bottom">
-                    <div class="col-md-4 xs-margin-30px-bottom">
-                        <a href="#" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/02.jpg" style="background-image: url(https://www.bootdey.com/image/340x232/20B2AA/000000);">
-                            <div class="mt-auto position-relative z-index-9">
-                                <h5 class="text-white">Education</h5>
-                                <div class="position-relative z-index-9 text-white opacity6">12 jobs</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 xs-margin-30px-bottom">
-                        <a href="#" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/03.jpg" style="background-image: url(https://www.bootdey.com/image/340x232/00CED1/000000);">
-                            <div class="mt-auto position-relative z-index-9">
-                                <h5 class="text-white">Reataurant</h5>
-                                <div class="position-relative z-index-9 text-white opacity6">20 jobs</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/04.jpg" style="background-image: url(https://www.bootdey.com/image/340x232/8A2BE2/000000);">
-                            <div class="mt-auto position-relative z-index-9">
-                                <h5 class="text-white">Construction</h5>
-                                <div class="position-relative z-index-9 text-white opacity6">94 jobs</div>
-                            </div>
-                        </a>
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+<br />
+
+@foreach (var category in ViewBag.Categories)
+{
+    <div class="col-lg-3 sm-margin-30px-bottom">
+        <div class="h-100">
+            <a href="#" class="card bg-img box-hover cover-background border-0 p-4 h-100">
+                <div class="mt-auto position-relative z-index-9">
+                    <label class="form-label">@category.Name</label>
+                    <div class="position-relative z-index-9 text-white opacity6">
+                        @category.ProductCount produse
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-7 xs-margin-30px-bottom">
-                        <a href="#" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/05.jpg" style="background-image: url(https://www.bootdey.com/image/340x232/FF7F50/000000);">
-                            <div class="mt-auto position-relative z-index-9">
-                                <h5 class="text-white">Design &amp; Art</h5>
-                                <div class="position-relative z-index-9 text-white opacity6">231 jobs</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-5">
-                        <a href="#" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/06.jpg" style="background-image: url(https://www.bootdey.com/image/340x232/FF1493/000000);">
-                            <div class="mt-auto position-relative z-index-9">
-                                <h5 class="text-white">Finance</h5>
-                                <div class="position-relative z-index-9 text-white opacity6">45 jobs</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
-</section>
+    <br />
+    <a class="btn alert-success" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id">Editare categorie</a>
+    <br />
+    <br />
+}
+<br />
+<a class="btn btn-success" asp-controller="Categories" asp-action="New">Adauga o noua categorie</a>
+<br />

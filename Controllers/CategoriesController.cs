@@ -23,6 +23,32 @@ namespace Shadow_Tech.Controllers
         }
         public IActionResult Index()
         {
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+
+            // Interogare pentru categorii și numărul de produse asociate
+            var categoriesWithProductCount = db.Categories
+                .Select(category => new
+                {
+                    category.Id,
+                    category.Name,
+                    ProductCount = category.Products.Count(product => product.Listed) // Numărul de produse asociate
+                })
+                .OrderBy(c => c.Name)
+                .ToList();
+
+            // Transmiterea datelor către view prin ViewBag
+            ViewBag.Categories = categoriesWithProductCount;
+
+            return View();
+        }
+
+        public IActionResult New()
+        {
+            
+
             return View();
         }
     }

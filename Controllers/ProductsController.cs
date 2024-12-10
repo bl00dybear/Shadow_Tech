@@ -34,6 +34,13 @@ namespace Shadow_Tech.Controllers
 
             return View(products);
         }
+        public IActionResult Index(int cid)
+        {
+            var products = db.Products.Include("Category").Where(prod => prod.Listed == true && prod.CategoryId == cid ).ToList();
+            SetAccessRights();
+
+            return View(products);
+        }
         [Authorize(Roles = "Contribuitor,Admin")]
         public IActionResult New()
         {
