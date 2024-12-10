@@ -11,8 +11,6 @@
     <h1>@ViewBag.message</h1>
 }
 
-<br />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container bootstrap snippets bootdey">
     <div class="row">
         @for(int i=0; i < categoryList.Count; i += 1)
@@ -21,21 +19,18 @@
                 <section class="widget stil" style="margin-left:10px; margin-right:10px;margin-bottom:40px;">
                     <div class="widget-body">
                         <div class="widget-top-overflow text-white">
-                            <img src="https://www.bootdey.com/image/800x400/87CEFA/000000">
+                            <img src="@categoryList[i].Image">
                             
                         </div>
                         <div class="post-user mt-sm">
                             
-                            <h3 class="mb-xs mt-xs">@categoryList[i].Name</h3>
-                            @categoryList[i].ProductCount produse
+                            <h2 class="mb-xs mt-xs">@categoryList[i].Name</h2>
+                            <h4>@categoryList[i].ProductCount produse</h4>
                         </div>
-                        <p class="text-light fs-mini m">
-                            Lots of cool stuff is happening around you. Just calm down for a sec and listen. Colors, sounds,
-                            thoughts, ideas.
-                        </p>
+                        <h6 class="text-light  m">@categoryList[i].Description </h6>
                     </div>
                     <footer class="bg-body-light d-flex justify-content-center" >
-                        <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Products" asp-action="Index" asp-route-id="@categoryList[i].Id+1">Show Products</a>
+                        <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Products" asp-action="Index" asp-route-id="@categoryList[i].Id">Show Products</a>
                         <a class="btn alert-success stilButton" style="margin-left:5px;margin-right:5px;" asp-controller="Categories" asp-action="Edit" asp-route-id="@categoryList[i].Id">Edit Category</a>
                     </footer>
                 </section>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shadow_Tech.Data;
@@ -24,6 +25,7 @@ namespace Shadow_Tech.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        [Authorize(Roles = "User, Admin, Contributors")]
         public IActionResult Index()
         {
             var cartItems = db.Carts.Where(i => i.UserId == 1).ToList();

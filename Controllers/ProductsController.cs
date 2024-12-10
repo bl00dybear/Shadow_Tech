@@ -26,13 +26,13 @@ namespace Shadow_Tech.Controllers
             _roleManager = roleManager;
         }
         [AllowAnonymous]
-        public IActionResult Index(int? cid)
+        public IActionResult Index(int? id)
         {
 
 
             var products = db.Products
                              .Include(p => p.Category) 
-                             .Where(prod => prod.Listed && (cid==null || prod.CategoryId==cid));
+                             .Where(prod => prod.Listed && (id==null || prod.CategoryId==id));
 
            
             SetAccessRights();

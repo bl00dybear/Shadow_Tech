@@ -34,6 +34,8 @@ namespace Shadow_Tech.Controllers
                 {
                     category.Id,
                     category.Name,
+                    category.Image,
+                    category.Description,
                     ProductCount = category.Products.Count(product => product.Listed) // Numărul de produse asociate
                 })
                 .OrderBy(c => c.Name)

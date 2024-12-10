@@ -17,9 +17,7 @@
         <a class="nav-link  text-mypurple" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
         <a class="nav-link  text-mypurple" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
         <a class="nav-link  text-mypurple" asp-area="" asp-controller="Carts" asp-action="Index">Cart</a>
-        <div>
-            <partial name="_LoginPartial" />
-        </div>
+        <partial name="_LoginPartial" />
 	</header>
 
     <div class="container">
@@ -28,11 +26,10 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            <img class="img-flex" src="images/dec2.png" alt="Decoratiune">
-            &copy; 2024 - ShadowTech - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="border-top footer text-muted container">
+        <img class="img-flex" src="~/images/dec2.png" alt="Decoratiune">
+        &copy; 2024 - ShadowTech - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

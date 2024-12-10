@@ -11,6 +11,8 @@ namespace Shadow_Tech.Models
         public string? Name { get; set; }
         [Required(ErrorMessage = "Category description is required")]
         public string? Description { get; set; }
+        [Required(ErrorMessage = "Category image is required")]
+        public string? Image { get; set; }
         public ICollection<Product>? Products { get; set; }
         
     }
