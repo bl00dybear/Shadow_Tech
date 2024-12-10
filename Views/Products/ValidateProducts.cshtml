@@ -1,0 +1,39 @@
+﻿
+
+<section class="py-5">
+@foreach(Shadow_Tech.Models.Product products in ViewBag.Products)
+{
+    <div class="container px-4 px-lg-5 my-5 stil">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@products.Photo" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div>
+                <h1 class="display-5 fw-bolder">@products.Title</h1>
+                <div class="fs-5 mb-5">
+                        <span>@products.Price lei</span>
+                </div>
+                    <p class="lead">@products.Description</p>
+                <div class="d-flex">
+                    <div class="me-3">
+                    <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@products.Id">
+                        <button class="btn btn-danger" type="submit" style="margin-top:15px; color:white;">Delete</button>
+                    </form>
+                    </div>
+                        <div class="me-3">
+                    <form method="post" asp-controller="Products" asp-action="Edit" asp-route-id="@products.Id">
+                            <button class="btn btn-danger" type="submit" style="margin-top:15px; color:white;">Edit</button>
+                   </form>
+                   </div>
+                    <div class="me-3">
+                        <form method="post" asp-controller="Products" asp-action="Validate" asp-route-id="@products.Id">
+                            <button class="btn btn-danger" type="submit" style="margin-top:15px; color:white;">Validate</button>
+                        </form>
+                    </div>
+                </div>
+                    <br /><br />
+
+            </div>
+        </div>
+    </div>
+}
+</section>

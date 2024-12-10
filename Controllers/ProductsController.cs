@@ -31,16 +31,16 @@ namespace Shadow_Tech.Controllers
 
 
             var products = db.Products
-                             .Include(p => p.Category) 
-                             .Where(prod => prod.Listed && (id==null || prod.CategoryId==id));
+                             .Include(p => p.Category)
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id));
 
-           
+
             SetAccessRights();
-            
 
-            return View(products.ToList()); 
+
+            return View(products.ToList());
         }
-        
+
 
         [Authorize(Roles = "Contribuitor,Admin")]
         public IActionResult New()
@@ -56,7 +56,7 @@ namespace Shadow_Tech.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(User.IsInRole("Admin"))
+                if (User.IsInRole("Admin"))
                     product.Listed = true;
                 else
                     product.Listed = false;
@@ -145,7 +145,7 @@ namespace Shadow_Tech.Controllers
         }
         [Authorize(Roles = "Contribuitor,Admin")]
         [HttpPost]
-        public IActionResult Edit(int id,Product requestProduct)
+        public IActionResult Edit(int id, Product requestProduct)
         {
             Product product = db.Products.Find(id);
 
@@ -174,9 +174,9 @@ namespace Shadow_Tech.Controllers
                 requestProduct.Categ = GetAllCategories();
                 return View(requestProduct);
             }
-            
+
         }
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             // Article article = db.Articles.Find(id);
 
@@ -184,7 +184,7 @@ namespace Shadow_Tech.Controllers
                                          .Where(prod => prod.Id == id)
                                          .First();
 
-            if ( User.IsInRole("Admin"))
+            if (User.IsInRole("Admin"))
             {
                 db.Products.Remove(product);
                 db.SaveChanges();
@@ -198,6 +198,46 @@ namespace Shadow_Tech.Controllers
                 TempData["messageType"] = "alert-danger";
                 return RedirectToAction("Index");
             }
+        }
+        public IActionResult ValidateProducts()
+        {
+            var products = db.Products
+                             .Include(p => p.Category)
+                             .Where(prod => prod.Listed == false);
+
+
+            ViewBag.Products = products;
+
+
+            return View();
+
+        }
+        [HttpPost]
+        public IActionResult Validate(int id)
+        {
+            // Find the product by its ID
+            Product product = db.Products.Find(id);
+
+            if (product != null)
+            {
+                // Set the product as listed
+                product.Listed = true;
+
+                // Save changes to the database
+                db.SaveChanges();
+
+                // Provide feedback
+                TempData["message"] = "Produsul a fost validat.";
+                TempData["messageType"] = "alert-success";
+            }
+            else
+            {
+                TempData["message"] = "Produsul nu a fost găsit.";
+                TempData["messageType"] = "alert-danger";
+            }
+
+            // Redirect to the same page (or specify another action if needed)
+            return RedirectToAction("ValidateProducts");
         }
 
         private void SetAccessRights()
