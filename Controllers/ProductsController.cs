@@ -79,17 +79,22 @@ namespace Shadow_Tech.Controllers
             var product = db.Products
                 .Include(p => p.Category)
                 .Include(p => p.Reviews)
-                .Include(r => r.User)
+                .Include(r => r.User) // Include și utilizatorul asociat fiecărei recenzii
                 .FirstOrDefault(p => p.Id == id);
+
             SetAccessRights();
+
             if (product == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Reviews = product.Reviews ?? new List<Review>();
             return View(product);
         }
+
         [HttpPost]
+        [Authorize] // Permite doar utilizatorilor autentificați să lase recenzii
         public IActionResult Show(int id, int Rating, string Comment)
         {
             var product = db.Products.FirstOrDefault(p => p.Id == id);
@@ -102,7 +107,9 @@ namespace Shadow_Tech.Controllers
             {
                 ProductId = id,
                 Rating = Rating,
-                Comment = Comment
+                Comment = Comment,
+                UserId = _userManager.GetUserId(User), // Setează utilizatorul curent
+                
             };
 
             db.Reviews.Add(review);
@@ -113,6 +120,7 @@ namespace Shadow_Tech.Controllers
 
             return RedirectToAction("Show", new { id });
         }
+
 
 
         [Authorize(Roles = "Contribuitor,Admin")]
