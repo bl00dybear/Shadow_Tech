@@ -28,19 +28,17 @@ namespace Shadow_Tech.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            var products = db.Products.Include("Category").Where(prod => prod.Listed == true).ToList();
-            SetAccessRights();
-            //ViewBag.Products = products;
+           
 
-            return View(products);
-        }
-        public IActionResult Index(int cid)
-        {
-            var products = db.Products.Include("Category").Where(prod => prod.Listed == true && prod.CategoryId == cid ).ToList();
+            var products = db.Products
+                             .Include(p => p.Category) // Ensure category details are included
+                             .Where(prod => prod.Listed)
+                             .ToList();
             SetAccessRights();
 
-            return View(products);
+            return View(products); // Return the list of products to the view
         }
+
         [Authorize(Roles = "Contribuitor,Admin")]
         public IActionResult New()
         {
