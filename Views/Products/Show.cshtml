@@ -1,31 +1,31 @@
 ﻿@model Shadow_Tech.Models.Product
 
 <section class="py-5">
-            <div class="container px-4 px-lg-5 my-5 stil">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.Photo" alt="..." /></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
-                        <h1 class="display-5 fw-bolder">@Model.Title</h1>
-                        <div class="fs-5 mb-5">
-                            <span>@Model.Price lei</span>
-                        </div>
-                        <p class="lead">@Model.Description</p>
-                        <div class="d-flex">
-                            <form method="post" asp-controller="Products" asp-action="AddToCart">
-		                    <input type="hidden" name="productId" value="@Model.Id" />
-		                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Adauga in cos</button>
+    <div class="container px-4 px-lg-5 my-5 stil">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.Photo" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div>
+                <h1 class="display-5 fw-bolder">@Model.Title</h1>
+                <div class="fs-5 mb-5">
+                    <span>@Model.Price lei</span>
+                </div>
+                <p class="lead">@Model.Description</p>
+                <div class="d-flex">
+                    <form method="post" asp-controller="Products" asp-action="AddToCart">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Adauga in cos</button>
+                    </form>
+                    @if (ViewBag.AfisareButoane || ViewBag.EsteAdmin)
+                    {
+                        <form method="get" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Editeaza produs</button>
                         </form>
-                        @if(ViewBag.AfisareButoane || ViewBag.EsteAdmin)
-                        {
-                        <form  method="get" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">
-                        <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Editeaza produs</button>
-                        </form>
-                        
-                        }
-                        </div>
-                        
+
+                    }
+                </div>
+
                 <form method="post" asp-controller="Products" asp-action="Show">
 
                     <div class="card-body "
@@ -64,7 +64,40 @@
                 </form>
 
 
-                    </div>
-                </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+
+        <h3>Recenzii</h3>
+        @if (ViewBag.Reviews != null)
+        {
+            foreach (var comm in ViewBag.Reviews)
+            {
+                <div class="card shadow-sm p-3 mb-4 bg-white rounded">
+                    <div class="card-body">
+                        <p>@comm.Comment</p>
+                        <small class="text-muted">Scris de @comm.User?.UserName</small>
+                    </div>
+
+                    @if ((comm.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin) && ViewBag.UserCurent != null)
+                    {
+                        <div class="d-flex justify-content-end">
+                            <a class="btn btn-outline-primary me-2" asp-controller="Reviews" asp-action="Edit" asp-route-id="@comm.Id">
+                                Editează
+                            </a>
+                            <form method="post" asp-controller="Reviews" asp-action="Delete" asp-route-id="@comm.Id">
+                                <button class="btn btn-outline-danger">Șterge</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">Nu există recenzii pentru acest produs.</p>
+        }
+    </div>
+</section>
