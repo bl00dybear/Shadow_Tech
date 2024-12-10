@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -33,6 +34,24 @@ namespace Shadow_Tech.Controllers
             var products = db.Products
                              .Include(p => p.Category)
                              .Where(prod => prod.Listed && (id == null || prod.CategoryId == id));
+
+            var search = "";
+            if (Convert.ToString(HttpContext.Request.Query["search"]) != null)
+            {
+                search = Convert.ToString(HttpContext.Request.Query["search"]).Trim();
+
+                List<int> productsIds = db.Products
+                    .Where(p => p.Title.Contains(search))
+                    .Select(p => p.Id)
+                    .ToList();
+
+                products = db.Products.Where(product => productsIds.Contains(product.Id) && product.Listed);
+
+            }
+
+            ViewBag.SearchingString = search;
+
+
 
 
             SetAccessRights();
