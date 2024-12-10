@@ -26,18 +26,21 @@ namespace Shadow_Tech.Controllers
             _roleManager = roleManager;
         }
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Index(int? cid)
         {
-           
+
 
             var products = db.Products
-                             .Include(p => p.Category) // Ensure category details are included
-                             .Where(prod => prod.Listed)
-                             .ToList();
-            SetAccessRights();
+                             .Include(p => p.Category) 
+                             .Where(prod => prod.Listed && (cid==null || prod.CategoryId==cid));
 
-            return View(products); // Return the list of products to the view
+           
+            SetAccessRights();
+            
+
+            return View(products.ToList()); 
         }
+        
 
         [Authorize(Roles = "Contribuitor,Admin")]
         public IActionResult New()
