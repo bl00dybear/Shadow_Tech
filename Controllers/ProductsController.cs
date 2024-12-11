@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Shadow_Tech.Data;
@@ -98,22 +99,25 @@ namespace Shadow_Tech.Controllers
             var product = db.Products
                 .Include(p => p.Category)
                 .Include(p => p.Reviews)
-                .Include(r => r.User) // Include și utilizatorul asociat fiecărei recenzii
+                .Include(r => r.User)
+                .Include("Reviews.User")
                 .FirstOrDefault(p => p.Id == id);
-
+           
             SetAccessRights();
-
+            db.SaveChanges();
             if (product == null)
             {
                 return NotFound();
             }
+            UpdateProductRating(id);
+
 
             ViewBag.Reviews = product.Reviews ?? new List<Review>();
             return View(product);
         }
 
         [HttpPost]
-        [Authorize] // Permite doar utilizatorilor autentificați să lase recenzii
+        [Authorize] 
         public IActionResult Show(int id, int Rating, string Comment)
         {
             var product = db.Products.FirstOrDefault(p => p.Id == id);
@@ -121,7 +125,7 @@ namespace Shadow_Tech.Controllers
             {
                 return NotFound();
             }
-
+            
             var review = new Review
             {
                 ProductId = id,
@@ -131,9 +135,13 @@ namespace Shadow_Tech.Controllers
                 
             };
 
+
+          
+            
+            
             db.Reviews.Add(review);
             db.SaveChanges();
-
+            UpdateProductRating(id);
             TempData["message"] = "Recenzia a fost adăugată cu succes!";
             TempData["messageType"] = "alert-success";
 
@@ -152,18 +160,9 @@ namespace Shadow_Tech.Controllers
 
             product.Categ = GetAllCategories();
 
-            if ((product.UserId == _userManager.GetUserId(User)) ||
-                User.IsInRole("Admin"))
-            {
-                return View(product);
-            }
-            else
-            {
+           
+            return View(product);
 
-                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui produs care nu va apartine";
-                TempData["messageType"] = "alert-danger";
-                return RedirectToAction("Index");
-            }
         }
         [Authorize(Roles = "Contribuitor,Admin")]
         [HttpPost]
@@ -428,6 +427,20 @@ namespace Shadow_Tech.Controllers
 
             
         }
-    
+        private void UpdateProductRating(int productId)
+        {
+            var product = db.Products.Include(p => p.Reviews)
+                                     .FirstOrDefault(p => p.Id == productId);
+
+            if (product != null)
+            {
+                product.ProductRating = (decimal)(product.Reviews.Any()
+                                        ? product.Reviews.Average(r => r.Rating)
+                                        : 0);
+                db.SaveChanges();
+            }
+        }
+
+
     }
 }

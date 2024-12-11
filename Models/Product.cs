@@ -18,6 +18,8 @@ namespace Shadow_Tech.Models
         public string? Description { get; set; }
         [Precision(18, 2)]
         public decimal Price { get; set; }
+        [Precision(18, 2)]
+        public decimal ProductRating { get; set; }
         public int Stock { get; set; }          //salvam stocul valabil al acestui produs
         public string? Photo { get; set; }          //salvam URL-ul pozei
         public bool Listed { get; set; }

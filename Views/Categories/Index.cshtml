@@ -3,7 +3,15 @@
     var categoryList = ViewBag?.Categories?? new List<Category>();
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="d-flex justify-content-between">
+    <h2>@ViewBag.Title</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-success" asp-controller="Categories" asp-action="New">New Category</a>
+    }
+    
+</div>
+
 <br />
 
 @if (TempData.ContainsKey("message"))
@@ -26,6 +34,7 @@
                             
                             <h2 class="mb-xs mt-xs">@categoryList[i].Name</h2>
                             <h4>@categoryList[i].ProductCount produse</h4>
+
                         </div>
                         <h6 class="text-light  m">@categoryList[i].Description </h6>
                     </div>
@@ -44,7 +53,11 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 
 <br />
-<a class="btn btn-success" asp-controller="Categories" asp-action="New">Adauga o noua categorie</a>
+@if(ViewBag.AfisareButoane)
+{<a class="btn btn-success" asp-controller="Categories" asp-action="New">Adauga o noua categorie</a>}
 <br />
+=======
+>>>>>>> f6d986bf726e571bc8f678f86c2842b43537ffc9

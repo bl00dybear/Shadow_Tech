@@ -48,10 +48,15 @@
 				cnt += 1;
 			}
 		</div>
+		@if (cnt % 3 == 1)
+		{
+			Console.WriteLine(cnt);
+			<img class="img-fluid" style="width:100%;margin-left:20px;margin-top:5rem;margin-bottom:5rem;" src="~/images/dec5.png" alt="Decoratiune">
+		}
 		@if (cnt % 3 == 2)
 		{
 			Console.WriteLine(cnt);
-			<img class="img-fluid" style="width:100%" src="~/images/dec3.png" alt="Decoratiune">
+			<img class="img-fluid" style="width:100%;margin-left:20px;margin-top:5rem;margin-bottom:5rem;" src="~/images/dec6.png" alt="Decoratiune">
 		}
 		
 

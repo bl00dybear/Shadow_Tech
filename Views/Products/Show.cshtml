@@ -10,7 +10,17 @@
                 <div class="fs-5 mb-5">
                     <span>@Model.Price lei</span>
                 </div>
+                
                 <p class="lead">@Model.Description</p>
+                <br />
+                @if (Model.ProductRating != 0)
+                {
+                    <p class="card-text">@Model.ProductRating</p>
+                }
+                else
+                {
+                    <p class="card-text">Produsul nu are review-uri inca</p>
+                }
                 <div class="d-flex">
                     <form method="post" asp-controller="Products" asp-action="AddToCart">
                         <input type="hidden" name="productId" value="@Model.Id" />
@@ -37,7 +47,7 @@
 
                         <textarea class="form-control" name="Comment"></textarea>
 
-                        <span asp-validation-for="Description" class="text-danger"></span>
+                        
                         <label>Lasa-ne si o nota</label>
                         <div class="rating">
                             <input type="radio" id="star5" name="Rating" value="5" />
@@ -75,20 +85,22 @@
         {
             foreach (var comm in ViewBag.Reviews)
             {
-                <div class="card shadow-sm p-3 mb-4 bg-white rounded">
-                    <div class="card-body">
+            <div class="container px-4 px-lg-5 my-5 stil">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                        <p> Rating: @comm.Rating / 5</p>
                         <p>@comm.Comment</p>
-                        <small class="text-muted">Scris de @comm.User?.UserName</small>
                     </div>
-
+                <div class="d-flex justify-content-begin">
+                    <small class="text-muted">Scris de @comm.User?.UserName</small>
+                </div>
                     @if ((comm.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin) && ViewBag.UserCurent != null)
                     {
                         <div class="d-flex justify-content-end">
                             <a class="btn btn-outline-primary me-2" asp-controller="Reviews" asp-action="Edit" asp-route-id="@comm.Id">
-                                Editează
+                                Edit
                             </a>
                             <form method="post" asp-controller="Reviews" asp-action="Delete" asp-route-id="@comm.Id">
-                                <button class="btn btn-outline-danger">Șterge</button>
+                                <button class="btn btn-outline-danger">Delete</button>
                             </form>
                         </div>
                     }

@@ -178,11 +178,11 @@ body {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
-    border-color: #7a3a84;
-/*    margin-left: 10px;
+    border-color: #7d4e72;
+    /*    margin-left: 10px;
     margin-right: 10px;*/
-    color: #7a3a84;
-    box-shadow: 8px 8px 10px #f15178;
+    color: #7d4e72;
+    box-shadow: 8px 8px 10px #7d4e72;
 }
 
 .homeCard {
@@ -192,10 +192,10 @@ body {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
-    border-color: #7a3a84;
+    border-color: #7d4e72;
     margin-left: 25px;
-    color: #7a3a84;
-    box-shadow: 8px 8px 10px #f15178;
+    color: #7d4e72;
+    box-shadow: 8px 8px 10px #7d4e72;
 }
 .homeCard img{
     margin-top:15px;
@@ -238,16 +238,16 @@ body {
 .stil {
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
-    border-color: #7a3a84;
-    color: #7a3a84;
-    box-shadow: 8px 8px 10px #f15178;
+    border-color: #7d4e72;
+    color: #7d4e72;
+    box-shadow: 8px 8px 10px #7d4e72;
 }
 
 .stilButton {
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
-    border-color: #7a3a84;
-    color: #7a3a84;
+    border-color: #7d4e72;
+    color: #7d4e72;
     margin-left: 8px;
     margin-right: 8px;
 }
@@ -451,3 +451,54 @@ a.custom-link:hover {
     background-color: #7d4e72; 
     border-color: #7d4e72;
 }
+
+/*.search-wrapper {
+
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}*/
+
+.search-container {
+/*    background: rgba(255, 255, 255, 0.95);*/
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+}
+
+.search-input {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+    .search-input:focus {
+/*        border-color: #6366f1;*/
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+.search-tags {
+    gap: 0.5rem;
+}
+
+.tag {
+    background: #7d4e72;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+    .tag:hover {
+        background: #f2517b;
+        color: white;
+        cursor: pointer;
+    }
+

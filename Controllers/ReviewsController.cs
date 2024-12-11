@@ -53,7 +53,7 @@ namespace Shadow_Tech.Controllers
                 existingReview.Comment = review.Comment;
                 existingReview.Rating = review.Rating;
                 db.SaveChanges();
-
+                UpdateProductRating(review.ProductId);
                 TempData["message"] = "Recenzia a fost actualizată cu succes.";
                 TempData["messageType"] = "alert-success";
                 return RedirectToAction("Show", "Products", new { id = review.ProductId });
@@ -64,11 +64,12 @@ namespace Shadow_Tech.Controllers
         public IActionResult Delete(int id)
         {
             var review = db.Reviews.Find(id);
-
             if (review != null)
             {
+            var ProductID = review.ProductId;
                 db.Reviews.Remove(review);
                 db.SaveChanges();
+                UpdateProductRating(ProductID);
 
                 TempData["message"] = "Recenzia a fost ștearsă cu succes.";
                 TempData["messageType"] = "alert-success";
@@ -79,8 +80,21 @@ namespace Shadow_Tech.Controllers
                 TempData["messageType"] = "alert-danger";
             }
 
-            return RedirectToAction("Show","Products",id); ;
+            return RedirectToAction("Index","Products"); ;
 
+        }
+        private void UpdateProductRating(int productId)
+        {
+            var product = db.Products.Include(p => p.Reviews)
+                                     .FirstOrDefault(p => p.Id == productId);
+
+            if (product != null)
+            {
+                product.ProductRating = (decimal)(product.Reviews.Any()
+                                        ? product.Reviews.Average(r => r.Rating)
+                                        : 0);
+                db.SaveChanges();
+            }
         }
     }
 }
