@@ -15,7 +15,7 @@
                 <br />
                 @if (Model.ProductRating != 0)
                 {
-                    <p class="card-text">@Model.ProductRating</p>
+                    <p class="card-text">Rating: @decimal.Round(Model.ProductRating,2) / 5</p>
                 }
                 else
                 {
@@ -24,7 +24,7 @@
                 <div class="d-flex">
                     <form method="post" asp-controller="Products" asp-action="AddToCart">
                         <input type="hidden" name="productId" value="@Model.Id" />
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <input class="form-control text-center me-3" id="inputQuantity"  value="1" style="max-width: 3rem" />
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Adauga in cos</button>
                     </form>
                     @if (ViewBag.AfisareButoane || ViewBag.EsteAdmin)
