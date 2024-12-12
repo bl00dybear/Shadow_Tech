@@ -24,31 +24,29 @@
                         {
                             @foreach (var item in Model)
                             {
-
-                                
-
                                 <!-- Single item -->
                                 <div class="row">
                                     <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                         <!-- Image -->
-                                        <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                                            <img src="@item.Photo"
-                                                 class="w-100" />
-                                            <a href="#!">
-                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        <a href="@Url.Action("Show", "Products", new { id = item.ProductId })" class="text-decoration-none" style="color: inherit;">
+
+                                            <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                                <img src="@item.Photo"
+                                                     class="w-100" />
+											</div>
                                             </a>
-                                        </div>
                                         <!-- Image -->
                                     </div>
 
                                     <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                         <!-- Data -->
-                                        <p><strong>@item.ProductName</strong></p>
+                                        <a href="@Url.Action("Show", "Products", new { id = item.ProductId })" class="text-decoration-none" style="color: inherit;">
+                                            <p><strong>@item.ProductName</strong></p>
 
-                                        <p class="text-start text-md-center">
-                                            <strong>@item.Price ron</strong>
-                                        </p>
-
+                                            <p class="text-start text-md-center">
+                                                <strong>@item.Price ron</strong>
+                                            </p>
+                                        </a>
                                         <!-- Data -->
                                     </div>
 
@@ -61,7 +59,7 @@
                                             </form>
 
                                             <div data-mdb-input-init class="form-outline">
-                                                <input id="form1" min="1" name="quantity" value=@item.Quantity type="number" class="form-control" />
+                                                <input id="form1" min="1" name="quantity" value=@item.Quantity type="number" class="form-control text-center" style="max-width: 6rem;" readonly />
                                                 <label class="form-label" for="form1">Quantity</label>
                                             </div>
 
@@ -75,7 +73,7 @@
 
 
                                         <form method="post" asp-controller="Carts" asp-action="RemoveFromCart" asp-route-id="@item.Id" class="text-start text-md-center">
-                                            <button class="btn btn-danger">DELETE</button>"
+                                            <button class="btn btn-danger" style="max-width: 6rem;">DELETE</button>"
                                         </form>
                                         <!-- Price -->
                                     </div>
@@ -150,9 +148,9 @@
                                 </li>
                             </ul>
 
-                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">
+                            <a href="@Url.Action("CheckOut", "Carts")" class="text-decoration-none" style="color: inherit;">
                                 Go to checkout
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,13 @@ namespace Shadow_Tech.Controllers
         [Authorize(Roles = "Contribuitor,Admin,User")]
         public IActionResult Index()
         {
-            var cartItems = db.Carts.Where(i => i.UserId == 1).ToList();
+            var cartItems = db.Carts.Where(i => i.UserId == _userManager.GetUserId(User)).ToList();
+            return View(cartItems);
+        }
+
+        public IActionResult CheckOut()
+        {
+            var cartItems = db.Carts.Where(i => i.UserId == _userManager.GetUserId(User)).ToList();
             return View(cartItems);
         }
 
@@ -49,7 +55,7 @@ namespace Shadow_Tech.Controllers
         public async Task<IActionResult> ClearCart()
         {
             //string userId = User.Identity.Name;
-            var userId = 1; // Pentru a simplifica, vom folosi un UserId fictiv
+            var userId = _userManager.GetUserId(User); // Pentru a simplifica, vom folosi un UserId fictiv
             var userCart = db.Carts.Where(ci => ci.UserId == userId);
             db.Carts.RemoveRange(userCart);
             await db.SaveChangesAsync();
@@ -88,7 +94,7 @@ namespace Shadow_Tech.Controllers
 
             //Console.WriteLine("aici");
 
-            int userId = cart.UserId;
+            string userId = cart.UserId;
             decimal totalSum = db.Carts
                 .Where(ci => ci.UserId == userId)
                 .Sum(ci => ci.Price*ci.Quantity);

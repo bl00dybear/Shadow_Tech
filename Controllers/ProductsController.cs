@@ -1,4 +1,5 @@
-﻿using Humanizer;
+﻿using AngleSharp.Text;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -388,17 +389,17 @@ namespace Shadow_Tech.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToCart(int productId)
+        public IActionResult AddToCart(int productId, int quantity = 1)
         {
             var product = db.Products.FirstOrDefault(p => p.Id == productId);
 
             if (product != null)
             {
-                var item = db.Carts.FirstOrDefault(i => i.ProductId == productId);
+                var item = db.Carts.FirstOrDefault(i => i.ProductId == productId && i.UserId == _userManager.GetUserId(User));
 
                 if (item != null)
                 {
-                    item.Quantity++;
+                    item.Quantity+=quantity;
                     db.SaveChanges();
                     return Redirect("Show/" + product.Id);
                 }
@@ -409,8 +410,8 @@ namespace Shadow_Tech.Controllers
                         ProductId = product.Id,
                         ProductName = product.Title,
                         Price = product.Price,
-                        UserId = 1,
-                        Quantity = 1,
+                        UserId =_userManager.GetUserId(User),
+                        Quantity = quantity ,
                         Photo = product.Photo
                     };
 

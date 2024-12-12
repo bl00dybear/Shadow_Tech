@@ -22,24 +22,47 @@
                     <p class="card-text">Produsul nu are review-uri inca</p>
                 }
                 <div class="d-flex">
+                    
+
                     <form method="post" asp-controller="Products" asp-action="AddToCart">
                         <input type="hidden" name="productId" value="@Model.Id" />
-                        <input class="form-control text-center me-3" id="inputQuantity"  value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Adauga in cos</button>
-                    </form>
-                    @if (ViewBag.AfisareButoane || ViewBag.EsteAdmin)
-                    {
-                        <form method="get" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Editeaza produs</button>
-                        </form>
+                        <!-- Câmpul pentru cantitate -->
 
-                    }
+                        <div class="input-group" style="max-width: 10rem;">
+                            <!-- Buton pentru scădere -->
+                            <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity()">-</button>
+
+                            <!-- Câmp pentru afișarea cantității -->
+                            <input id="inputQuantity"
+                                   name="quantity"
+                                   type="number"
+                                   value="1"
+                                   readonly
+                                   class="form-control text-center"
+                                   style="max-width: 4rem;" />
+
+                            <!-- Buton pentru creștere -->
+                            <button type="button" class="btn btn-outline-secondary" onclick="increaseQuantity()">+</button>
+                        </div>
+                        <button class="btn btn-outline-dark flex-shrink-0"
+                                type="submit"
+                                style="margin-top:15px; color:white;">
+                            Adauga in cos
+                        </button>
+
+                       
+                    </form>
+                    
                 </div>
 
+                @if (ViewBag.AfisareButoane || ViewBag.EsteAdmin)
+                {
+                    <form method="get" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Editeaza produs</button>
+                    </form>
+                }
+
                 <form method="post" asp-controller="Products" asp-action="Show">
-
-                    <div class="card-body "
-
                         <input type="hidden" name="ProductId" value="@Model.Id" />
 
                         <label>Continut Review</label>
@@ -68,9 +91,6 @@
 
                         <br /><br />
                         <button class="btn btn-success" type="submit">Adauga Review-ul</button>
-
-                    </div>
-
                 </form>
 
 
@@ -113,3 +133,19 @@
         }
     </div>
 </section>
+
+<script>
+    function decreaseQuantity() {
+        const input = document.getElementById('inputQuantity');
+        let value = parseInt(input.value, 10);
+        if (value > 1) { // Asigură-te că valoarea minimă este 1
+            input.value = value - 1;
+        }
+    }
+
+    function increaseQuantity() {
+        const input = document.getElementById('inputQuantity');
+        let value = parseInt(input.value, 10);
+        input.value = value + 1; // Crește valoarea cu 1
+    }
+</script>
