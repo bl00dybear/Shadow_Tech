@@ -29,65 +29,42 @@ namespace Shadow_Tech.Controllers
             _roleManager = roleManager;
         }
         [AllowAnonymous]
-        public IActionResult Index(int? id, string filter)
+        public IActionResult Index(int? id, string filter = "")
         {
+            // Obținem lista inițială de produse
             var products = db.Products
                              .Include(p => p.Category)
-                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id)); 
-            switch (filter)
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id));
+
+            // Aplicăm sortarea în funcție de filtrul din rută
+            products = filter switch
             {
-                case "PriceAsc":
-                    products = db.Products
-                             .Include(p => p.Category)
-                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
-                             .OrderBy(p => p.Price);
-                    break;
-                case "PriceDesc":
-                    products = db.Products
-                             .Include(p => p.Category)
-                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
-                             .OrderByDescending(p => p.Price);
-                    break;
-                case "RatingAsc":
-                    products = db.Products
-                             .Include(p => p.Category)
-                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
-                             .OrderBy(p => p.ProductRating);
-                    break;
-                case "RatingDesc":
-                    products = db.Products
-                             .Include(p => p.Category)
-                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
-                             .OrderByDescending(p => p.ProductRating);
-                    break;
-            }
+                "priceasc" => products.OrderBy(p => p.Price),
+                "pricedesc" => products.OrderByDescending(p => p.Price),
+                "ratingasc" => products.OrderBy(p => p.ProductRating),
+                "ratingdesc" => products.OrderByDescending(p => p.ProductRating),
+                _ => products // Dacă nu există un filtru valid, păstrăm lista nesortată
+            };
 
-                
-
-            var search = "";
-            if (Convert.ToString(HttpContext.Request.Query["search"]) != null)
+            // Verificăm dacă există un termen de căutare
+            var search = Convert.ToString(HttpContext.Request.Query["search"])?.Trim();
+            if (!string.IsNullOrEmpty(search))
             {
-                search = Convert.ToString(HttpContext.Request.Query["search"]).Trim();
+                var productsIds = db.Products
+                                    .Where(p => p.Title.Contains(search))
+                                    .Select(p => p.Id)
+                                    .ToList();
 
-                List<int> productsIds = db.Products
-                    .Where(p => p.Title.Contains(search))
-                    .Select(p => p.Id)
-                    .ToList();
-
-                products = db.Products.Where(product => productsIds.Contains(product.Id) && product.Listed);
-
+                products = products.Where(product => productsIds.Contains(product.Id));
             }
 
             ViewBag.SearchingString = search;
 
-
-
-
             SetAccessRights();
-
 
             return View(products.ToList());
         }
+
 
 
         [Authorize(Roles = "Contribuitor,Admin")]

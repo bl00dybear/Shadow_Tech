@@ -12,32 +12,30 @@
 	}
 </div>
 
-
-
-
 <div class="d-flex justify-content-center">
     <div class="search-container stil " style="">
         <h4 class="mb-4 text-center">Search for Products</h4>
 
         <form method="GET" asp-action="Index" asp-controller="Products">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search products" name="search"
-                       value="@ViewBag.SearchString" style="border-radius:0px;">
-                <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Search</button>
+                <input type="text" class="form-control" placeholder="Search products..." name="search"
+                       value="@ViewBag.SearchString" style="border-radius:5px;margin-right:10px;width:60%;">
+                <form method="GET" action="/apply-filter" class="input-group mb-3">
+                    <select class="form-select" name="filter" aria-label="Default select example" style="border-radius:5px;">
+                        <option value="">Filter</option>
+                        <option value="priceasc">Ascending (by price)</option>
+                        <option value="pricedesc">Descending (by price)</option>
+                        <option value="ratingasc">Ascending (by rating)</option>
+                        <option value="ratingdesc">Descending (by rating)</option>
+                    </select>
+                    <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Apply Filter</button>
+                </form>
             </div>
         
+            
 
         
-            <div class="input-group mb-3">
-                <select class="form-select" name="filter" aria-label="Default select example" style="border-radius:0px;">
-                    <option value="">Select a filter</option>
-                    <option value="PriceAsc">Ascending (by price)</option>
-                    <option value="PriceDesc">Descending (by price)</option>
-                    <option value="RatingAsc">Ascending (by rating)</option>
-                    <option value="RatingDesc">Descending (by rating)</option>
-                </select>
-                <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Apply Filter</button>
-            </div>
+            
         </form>
     </div>
 </div>
