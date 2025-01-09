@@ -1,14 +1,17 @@
-﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+﻿@model Shadow_Tech.Models.Order
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <div class="container">
 
     <div class="row ">
         <div class="col-xl-8">
-
+            <form method="post" asp-action="CheckOut" asp-controller="Carts">
             <div class="card stil">
                 <div class="card-body">
                     <ol class="activity-checkout mb-0 px-4 mt-3">
+                        
                         <li class="checkout-item">
                             <div class="avatar checkout-icon p-1">
                                 <div class="avatar-title rounded-circle bg-primary">
@@ -20,39 +23,39 @@
                                     <h5 class="font-size-16 mb-1">Billing Info</h5>
                                     <p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
                                     <div class="mb-3">
-                                        <form>
+                                        
                                             <div>
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="billing-name">Name</label>
-                                                            <input type="text" class="form-control" id="billing-name" placeholder="Enter name" style="background-color:transparent">
+                                                            <label asp-for="Name" class="form-label" for="billing-name">Name</label>
+                                                            <input asp-for="Name" type="text" class="form-control" id="billing-name" placeholder="Enter name" style="background-color:transparent">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="billing-email-address">Email Address</label>
-                                                            <input type="email" class="form-control" id="billing-email-address" placeholder="Enter email" style="background-color:transparent">
+                                                            <label asp-for="Email" class="form-label" for="billing-email-address">Email Address</label>
+                                                            <input asp-for="Email" type="email" class="form-control" id="billing-email-address" placeholder="Enter email" style="background-color:transparent">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="billing-phone">Phone</label>
-                                                            <input type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no." style="background-color:transparent">
+                                                            <label asp-for="Phone"class="form-label" for="billing-phone">Phone</label>
+                                                            <input asp-for="Phone" type=" text" class="form-control" id="billing-phone" placeholder="Enter Phone no." style="background-color:transparent">
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="billing-address">Address</label>
-                                                    <textarea class="form-control" id="billing-address" rows="3" placeholder="Enter full address" style="background-color:transparent"></textarea>
+                                                    <label asp-for="Address" class="form-label" for="billing-address">Address</label>
+                                                    <textarea asp-for="Address" class="form-control" id="billing-address" rows="3" placeholder="Enter full address" style="background-color:transparent"></textarea>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="mb-4 mb-lg-0">
-                                                            <label class="form-label">Country</label>
-                                                            <select class="form-control form-select" title="Country" style="background-color:transparent">
+                                                            <label asp-for="Country"  class="form-label">Country</label>
+                                                            <select asp-for="Country" class="form-control form-select" title="Country" style="background-color:transparent">
                                                                 <option value="0">Select Country</option>
                                                                 <option value="AF">Afghanistan</option>
                                                                 <option value="AL">Albania</option>
@@ -67,75 +70,25 @@
 
                                                     <div class="col-lg-4">
                                                         <div class="mb-4 mb-lg-0">
-                                                            <label class="form-label" for="billing-city">City</label>
-                                                            <input type="text" class="form-control" id="billing-city" placeholder="Enter City" style="background-color:transparent">
+                                                            <label asp-for="City"  class="form-label" for="billing-city">City</label>
+                                                            <input asp-for="City" type="text" class="form-control" id="billing-city" placeholder="Enter City" style="background-color:transparent">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-4">
                                                         <div class="mb-0">
-                                                            <label class="form-label" for="zip-code">Zip / Postal code</label>
-                                                            <input type="text" class="form-control" id="zip-code" placeholder="Enter Postal code" style="background-color:transparent">
+                                                            <label asp-for="PostalCode" class="form-label" for="zip-code">Zip / Postal code</label>
+                                                            <input asp-for="PostalCode" type="text" class="form-control" id="zip-code" placeholder="Enter Postal code" style="background-color:transparent">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li class="checkout-item">
-                            <div class="avatar checkout-icon p-1">
-                                <div class="avatar-title rounded-circle bg-primary">
-                                    <i class="bx bxs-truck text-white font-size-20"></i>
-                                </div>
-                            </div>
-                            <div class="feed-item-list">
-                                <div>
-                                    <h5 class="font-size-16 mb-1">Shipping Info</h5>
-                                    <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div data-bs-toggle="collapse">
-                                                    <label class="card-radio-label mb-0">
-                                                        <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
-                                                        <div class="card-radio text-truncate p-3" style="background-color:transparent">
-                                                            <span class="fs-14 mb-4 d-block">Address 1</span>
-                                                            <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
-                                                            <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-
-                                                            <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
-                                                        </div>
-                                                    </label>
-                                                    <div class="edit-btn bg-light  rounded">
-                                                        <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
-                                                            <i class="bx bx-pencil font-size-16"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div>
-                                                    <label class="card-radio-label mb-0">
-                                                        <input type="radio" name="address" id="info-address2" class="card-radio-input">
-                                                        <div class="card-radio text-truncate p-3" style="background-color:transparent">
-                                                            <span class="fs-14 mb-4 d-block">Address 2</span>
-                                                            <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
-                                                            <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-                                                            <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
-                                                        </div>
-                                                    </label>
-                                         
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                       
                         <li class="checkout-item">
                             <div class="avatar checkout-icon p-1">
                                 <div class="avatar-title rounded-circle bg-primary">
@@ -153,7 +106,7 @@
                                         <div class="col-lg-3 col-sm-6" style="background-color:transparent">
                                             <div data-bs-toggle="collapse">
                                                 <label class="card-radio-label">
-                                                    <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+                                                        <input asp-for="CardPayment" value="true" type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
                                                     <span class="card-radio py-3 text-center text-truncate">
                                                         <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                         Credit / Debit Card
@@ -165,19 +118,7 @@
                                         <div class="col-lg-3 col-sm-6">
                                             <div>
                                                 <label class="card-radio-label">
-                                                    <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input">
-                                                    <span class="card-radio py-3 text-center text-truncate">
-                                                        <i class="bx bxl-paypal d-block h2 mb-3"></i>
-                                                        Paypal
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-sm-6">
-                                            <div>
-                                                <label class="card-radio-label">
-                                                    <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
+                                                    <input asp-for="CardPayment" value="false" type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
 
                                                     <span class="card-radio py-3 text-center text-truncate">
                                                         <i class="bx bx-money d-block h2 mb-3"></i>
@@ -191,6 +132,7 @@
                                 </div>
                             </div>
                         </li>
+                       
                     </ol>
                 </div>
             </div>
@@ -203,12 +145,13 @@
                 </div> <!-- end col -->
                 <div class="col">
                     <div class="text-end mt-2 mt-sm-0">
-                        <a href="#" class="btn btn-success">
+                        <button type="submit" class="btn btn-success">
                             <i class="mdi mdi-cart-outline me-1"></i> Procced
-                        </a>
+                        </button>
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row-->
+            </form>
         </div>
         <div class="col-xl-4">
             <div class="card checkout-order-summary stil">
@@ -255,39 +198,8 @@
                                     </td>
                                     <td>$ 260</td>
                                 </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h5 class="font-size-14 m-0">Sub Total :</h5>
-                                    </td>
-                                    <td>
-                                        $ 780
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h5 class="font-size-14 m-0">Discount :</h5>
-                                    </td>
-                                    <td>
-                                        - $ 78
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="2">
-                                        <h5 class="font-size-14 m-0">Shipping Charge :</h5>
-                                    </td>
-                                    <td>
-                                        $ 25
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h5 class="font-size-14 m-0">Estimated Tax :</h5>
-                                    </td>
-                                    <td>
-                                        $ 18.20
-                                    </td>
-                                </tr>
+                                
+                                
 
                                 <tr>
                                     <td colspan="2">

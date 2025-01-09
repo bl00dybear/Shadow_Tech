@@ -29,13 +29,40 @@ namespace Shadow_Tech.Controllers
             _roleManager = roleManager;
         }
         [AllowAnonymous]
-        public IActionResult Index(int? id)
+        public IActionResult Index(int? id, string filter)
         {
-
-
             var products = db.Products
                              .Include(p => p.Category)
-                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id));
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id)); 
+            switch (filter)
+            {
+                case "PriceAsc":
+                    products = db.Products
+                             .Include(p => p.Category)
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
+                             .OrderBy(p => p.Price);
+                    break;
+                case "PriceDesc":
+                    products = db.Products
+                             .Include(p => p.Category)
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
+                             .OrderByDescending(p => p.Price);
+                    break;
+                case "RatingAsc":
+                    products = db.Products
+                             .Include(p => p.Category)
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
+                             .OrderBy(p => p.ProductRating);
+                    break;
+                case "RatingDesc":
+                    products = db.Products
+                             .Include(p => p.Category)
+                             .Where(prod => prod.Listed && (id == null || prod.CategoryId == id))
+                             .OrderByDescending(p => p.ProductRating);
+                    break;
+            }
+
+                
 
             var search = "";
             if (Convert.ToString(HttpContext.Request.Query["search"]) != null)

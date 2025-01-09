@@ -19,21 +19,26 @@
     <div class="search-container stil " style="">
         <h4 class="mb-4 text-center">Search for Products</h4>
 
-        <form method="GET">
+        <form method="GET" asp-action="Index" asp-controller="Products">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Search products" name="search"
-                       value="@ViewBag.SearchString">
+                       value="@ViewBag.SearchString" style="border-radius:0px;">
                 <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Search</button>
             </div>
-        </form>
+        
 
-        <div class="search-tags d-flex flex-wrap mb-4">
-            <span class="tag">Technology</span>
-            <span class="tag">Design</span>
-            <span class="tag">Development</span>
-            <span class="tag">AI</span>
-            <span class="tag">Machine Learning</span>
-        </div>
+        
+            <div class="input-group mb-3">
+                <select class="form-select" name="filter" aria-label="Default select example" style="border-radius:0px;">
+                    <option value="">Select a filter</option>
+                    <option value="PriceAsc">Ascending (by price)</option>
+                    <option value="PriceDesc">Descending (by price)</option>
+                    <option value="RatingAsc">Ascending (by rating)</option>
+                    <option value="RatingDesc">Descending (by rating)</option>
+                </select>
+                <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Apply Filter</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -60,7 +65,7 @@
                                 <div class="card-body">
                                     <h3 class="card-title">@product.Title</h3>
                                     <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
-                                    <h6 class="card-text">@product.Description</h6>
+                                    <p class="card-text">@product.Description</p>
                                         <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
                                             <button class="btn btn-danger" type="submit">Delete Product</button>
                                         </form>
@@ -76,9 +81,13 @@
                                 <div class="card-body">
                                     <h3 class="card-title">@product.Title</h3>
                                     <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
-                                    <h5 class="card-text">@product.Description</h5>
+                                  
                                     @if(product.ProductRating!=0){   
-                                        <h6 class="card-text">@product.ProductRating</h6>
+                                        <h5 class="card-text">Rating : @product.ProductRating / 5</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5 class="card-text">No reviews yet</h5>                                       
                                     }
                                 </div>
                             </div>

@@ -35,9 +35,61 @@ namespace Shadow_Tech.Controllers
         public IActionResult CheckOut()
         {
             var cartItems = db.Carts.Where(i => i.UserId == _userManager.GetUserId(User)).ToList();
-            return View(cartItems);
+            ViewBag.CartItems = cartItems;
+            var order= new Order();
+            return View(order);
         }
 
+
+        [HttpPost]
+        public IActionResult CheckOut(Order neworder)
+        {
+            var cartItems = db.Carts.Where(i => i.UserId == _userManager.GetUserId(User)).ToList();
+            // Step 1: Get the list of product IDs from the cart items
+            var productIds = cartItems.Select(ci => ci.ProductId).ToList();
+
+            // Step 2: Query the database with these IDs
+            var productList = db.Products
+                .Where(p => productIds.Contains(p.Id))
+                .ToList();
+
+            foreach (var product in productList)
+            {
+                if (product.Stock < cartItems.Where(ci => ci.ProductId == product.Id).Sum(ci => ci.Quantity))
+                {
+                    ModelState.AddModelError("Stock", "Stock insuficient pentru produsul " + product.Title);
+                    return View(neworder);
+                }
+            }
+            foreach (var product in productList)
+            {
+                product.Stock -= cartItems.Where(ci => ci.ProductId == product.Id).Sum(ci => ci.Quantity);
+            }
+            Order order = new Order
+            {
+                UserId = _userManager.GetUserId(User),
+                Address = neworder.Address,
+                City = neworder.City,
+                PostalCode = neworder.PostalCode,
+                Date = DateTime.Now,
+                Email = neworder.Email,
+                Name = neworder.Name,
+                Phone = neworder.Phone,
+                Country = neworder.Country,
+                Total = cartItems.Sum(ci => ci.Price * ci.Quantity),
+                CardPayment = neworder.CardPayment,
+                OrderProduct = cartItems.Select(ci => new OrderProduct
+                {
+                    ProductId = ci.ProductId,
+                    Quantity = ci.Quantity
+
+                }).ToList()
+            };
+            db.Orders.Add(order);
+            db.Carts.RemoveRange(cartItems);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         public IActionResult RemoveFromCart(int id)
