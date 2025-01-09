@@ -2,9 +2,47 @@
 
 @{
     ViewData["Title"] = "Product List";
+    // var categoryList = Model.Cat;
 }
+<div class="d-flex justify-content-between">
+	<h1>@ViewBag.Title</h1>
+	@if (User.IsInRole("Admin"))
+	{
+		<a class="btn btn-success h2" asp-controller="Products" asp-action="New">New Product</a>
+	}
+</div>
 
-<h1>Product List</h1>
+
+
+
+<div class="d-flex justify-content-center">
+    <div class="search-container stil " style="">
+        <h4 class="mb-4 text-center">Search for Products</h4>
+
+        <form method="GET" asp-action="Index" asp-controller="Products">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search products" name="search"
+                       value="@ViewBag.SearchString" style="border-radius:0px;">
+                <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Search</button>
+            </div>
+        
+
+        
+            <div class="input-group mb-3">
+                <select class="form-select" name="filter" aria-label="Default select example" style="border-radius:0px;">
+                    <option value="">Select a filter</option>
+                    <option value="PriceAsc">Ascending (by price)</option>
+                    <option value="PriceDesc">Descending (by price)</option>
+                    <option value="RatingAsc">Ascending (by rating)</option>
+                    <option value="RatingDesc">Descending (by rating)</option>
+                </select>
+                <button class="btn btn-outline-success" type="submit" style="margin-left:10px;">Apply Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 
 <div class="row">
 	@{
@@ -12,27 +50,53 @@
 	}
     @for (int i = 0; i < productList.Count; i += 3)
     {
-        <div class="card-deck mb-3 text-center d-flex justify-content-around">
+        <div class="card-deck mb-3 text-center d-flex justify-content-around"> 
             @for (int j = 0; j < 3; j += 1)
             {
                 if (i + j < productList.Count)
                 {
                     var product = productList[i + j];
-
                     <!-- Adaugă link către pagina ShowProduct -->
-                    <a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit;">
-                        <div class="card homeCard">
-                            <img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
-                            <div class="card-body">
-                                <h3 class="card-title">@product.Title</h3>
-                                <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
-                                <h6 class="card-text">@product.Description</h6>
+                    @if (ViewBag.EsteAdmin == true)
+                    {
+                        <a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit">
+                            <div class="card homeCard" style="height:38rem;">
+                                <img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
+                                <div class="card-body">
+                                    <h3 class="card-title">@product.Title</h3>
+                                    <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
+                                    <p class="card-text">@product.Description</p>
+                                        <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
+                                            <button class="btn btn-danger" type="submit">Delete Product</button>
+                                        </form>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                }
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit">
+                            <div class="card homeCard">
+                                <img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
+                                <div class="card-body">
+                                    <h3 class="card-title">@product.Title</h3>
+                                    <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
+                                  
+                                    @if(product.ProductRating!=0){   
+                                        <h5 class="card-text">Rating : @product.ProductRating / 5</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5 class="card-text">No reviews yet</h5>                                       
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    }
+
+        }
             }
         </div>
     }
-
+    
 </div>

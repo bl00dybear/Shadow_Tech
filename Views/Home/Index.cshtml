@@ -16,6 +16,7 @@
 	</div>
 	@{
 		var productList = Model?.ToList() ?? new List<Product>();
+		var cnt = 0;
 	}
 	@for(int i = 0; i < productList.Count; i+=3)
 	{
@@ -36,40 +37,38 @@
 						<div class="card-body">
 							<h3 class="card-title">@product.Title</h3>
 							<h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
-							<h6 class="card-text">@product.Description</h6>
+								@if (product.ProductRating != 0)
+								{
+									<h5 class="card-text">Rating : @product.ProductRating / 5</h5>
+								}
+								else
+								{
+									<h5 class="card-text">No reviews yet</h5>
+								}
 						</div>
 					</div>
 					</a>
 				}
+				
+			}
+			@{
+				cnt += 1;
 			}
 		</div>
+		@if (cnt % 3 == 1)
+		{
+			Console.WriteLine(cnt);
+			<img class="img-fluid" style="width:100%;margin-left:20px;margin-top:5rem;margin-bottom:5rem;" src="~/images/dec5.png" alt="Decoratiune">
+		}
+		@if (cnt % 3 == 2)
+		{
+			Console.WriteLine(cnt);
+			<img class="img-fluid" style="width:100%;margin-left:20px;margin-top:5rem;margin-bottom:5rem;" src="~/images/dec6.png" alt="Decoratiune">
+		}
+		
 
 	}
 
-	<img class="img-fluid" style="width:100%" src="~/images/dec3.png" alt="Decoratiune">
-
-	<div class="card-deck mb-3 text-center d-flex justify-content-around">
-		<div class="card bg-transparent" style="width: 25rem; margin-top:15px; text-align: center;">
-			<img src="~/images/dec4.png" style="height:100%" alt="...">
-		</div>
-		<div class="card bg-transparent" style="width: 25rem; margin-top:15px; text-align: center;">
-			<img src="~/images/laptop.png" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-		<div class="card bg-transparent" style="width: 25rem; margin-top:15px; text-align: center;">
-			<img src="~/images/laptop.png" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-		
-	</div>
 </div>
 
 

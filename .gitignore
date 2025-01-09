@@ -35,3 +35,5 @@ appsettings.json
 Properties/serviceDependencies.json
 Properties/serviceDependencies.local.json
 /Data
+Shadow Tech.csproj
+/Data/Migrations

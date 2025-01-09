@@ -1,0 +1,43 @@
+﻿@model Shadow_Tech.Models.Review
+
+@{
+    ViewBag.Title = "Editare Review";
+}
+
+<h2>Editare Categorie</h2>
+
+<form method="post" asp-controller="Reviews" asp-action="Edit">
+
+    <div class="card-body "
+
+                        <input type="hidden" name="ProductId" value="@Model.Id" />
+
+                        <label>Continut Review</label>
+                        <br />
+
+                        <textarea class="form-control" name="Comment"></textarea>
+
+                        <label>Lasa-ne si o nota</label>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="Rating" value="5" />
+                            <label for="star5" title="5 stele">☆</label>
+
+                            <input type="radio" id="star4" name="Rating" value="4" />
+                            <label for="star4" title="4 stele">☆</label>
+
+                            <input type="radio" id="star3" name="Rating" value="3" />
+                            <label for="star3" title="3 stele">☆</label>
+
+                            <input type="radio" id="star2" name="Rating" value="2" />
+                            <label for="star2" title="2 stele">☆</label>
+
+                            <input type="radio" id="star1" name="Rating" value="1" />
+                            <label for="star1" title="1 stea">☆</label>
+                        </div>
+
+                        <br /><br />
+                        <button class="btn btn-success" type="submit">Adauga Review-ul</button>
+
+                    </div>
+
+</form>

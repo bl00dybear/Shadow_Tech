@@ -33,7 +33,7 @@ namespace Shadow_Tech.Models
                 // CREAREA UTILIZATORILOR
                 var adminUser = new ApplicationUser
                 {
-                    UserName = "admin@test.com",
+                    UserName = "admin",
                     Email = "admin@test.com",
                     EmailConfirmed = true
                 };

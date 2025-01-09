@@ -1,0 +1,42 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+
+<section class="vh-80">
+    <div class="container py-5 h-100" style="background-color:transparent;color:#7d4e72">
+        <div class="row d-flex justify-content-center align-items-center h-100 ">
+            <div class="col col-xl-10 ">
+                <div class="card" style="border-radius: 1rem;">
+                    
+                    <img src="~/images/skulldown.png"
+						 alt="login form" class="img-fluid" style="border-radius: 1rem 1rem 0 0;" />
+                    <h2 class="align-self-center">Change your account settings</h2>
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-4 d-md-block">
+                            <partial name="_ManageNav" />
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-8 d-flex align-items-center" style="background-color:transparent;">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
