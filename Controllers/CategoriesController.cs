@@ -101,7 +101,7 @@ namespace Shadow_Tech.Controllers
                 
                 
             }
-            return RedirectToAction("Index");
+            return View(category);
         }
 
         [Authorize(Roles ="Admin")]

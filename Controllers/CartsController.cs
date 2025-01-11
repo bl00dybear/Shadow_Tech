@@ -29,6 +29,7 @@ namespace Shadow_Tech.Controllers
         public IActionResult Index()
         {
             var cartItems = db.Carts.Where(i => i.UserId == _userManager.GetUserId(User)).ToList();
+            ViewBag.Date = DateTime.Today.AddDays(2).Date;
             return View(cartItems);
         }
 
@@ -63,7 +64,7 @@ namespace Shadow_Tech.Controllers
             {
                 if (product.Stock < cartItems.Where(ci => ci.ProductId == product.Id).Sum(ci => ci.Quantity))
                 {
-                    ModelState.AddModelError("Stock", "Stock insuficient pentru produsul " + product.Title);
+                    ModelState.AddModelError("Stock", "There is no more stock for" + product.Title + ". Only "+ product.Stock+" products available.");
                     return View(neworder);
                 }
             }
@@ -118,7 +119,7 @@ namespace Shadow_Tech.Controllers
             db.Carts.RemoveRange(userCart);
             await db.SaveChangesAsync();
 
-            return Json(new { success = true, message = "Coșul a fost golit!" });
+            return Json(new { success = true, message = "Cart is empty!" });
         }
 
         [HttpPost]
