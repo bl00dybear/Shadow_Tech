@@ -35,6 +35,12 @@ namespace Shadow_Tech.Controllers
         public IActionResult CheckOut()
         {
             var cartItems = db.Carts.Where(i => i.UserId == _userManager.GetUserId(User)).ToList();
+            for (int i = 0; i < cartItems.Count(); i++)
+            {
+                if(cartItems[i].ProductName.Length >=15)
+                    cartItems[i].ProductName = cartItems[i].ProductName.Substring(0, 15)+"...";
+            }
+            
             ViewBag.CartItems = cartItems;
             var order= new Order();
             return View(order);

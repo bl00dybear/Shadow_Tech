@@ -1,5 +1,12 @@
 ﻿@model Shadow_Tech.Models.Order
-
+@{
+    decimal totalcomanda = 0;
+    @foreach (var item in ViewBag.cartItems)
+    {
+        totalcomanda += item.Price * item.Quantity;
+        
+    }
+}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -172,35 +179,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-                                    <td>
-                                        <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Waterproof Mobile Phone</a></h5>
-                                        <p class="text-muted mb-0">
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star-half text-warning"></i>
-                                        </p>
-                                        <p class="text-muted mb-0 mt-1">$ 260 x 2</p>
-                                    </td>
-                                    <td>$ 520</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-                                    <td>
-                                        <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Smartphone Dual Camera</a></h5>
-                                        <p class="text-muted mb-0">
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star text-warning"></i>
-                                            <i class="bx bxs-star text-warning"></i>
-                                        </p>
-                                        <p class="text-muted mb-0 mt-1">$ 260 x 1</p>
-                                    </td>
-                                    <td>$ 260</td>
-                                </tr>
+                                @foreach (var item in ViewBag.cartItems)
+                                {
+                                    
+                                    <tr>
+                                        <th scope="row"><img src="@item.Photo" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+                                        <td>
+                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">@item.ProductName  </a></h5>
+                                            
+                                            <p class="text-muted mb-0 mt-1">$ @item.Price x @item.Quantity</p>
+                                        </td>
+                                        <td>$ @item.TotalPrice </td>
+                                    </tr>
+                                }
                                 
                                 
 
@@ -209,7 +200,7 @@
                                         <h5 class="font-size-14 m-0">Total:</h5>
                                     </td>
                                     <td>
-                                        $ 745.2
+                                        $@totalcomanda
                                     </td>
                                 </tr>
                             </tbody>

@@ -395,8 +395,10 @@ namespace Shadow_Tech.Controllers
         [HttpPost]
         public IActionResult AddToCart(int productId, int quantity = 1)
         {
+            if (!(User.IsInRole("Contribuitor") || User.IsInRole("Admin") || User.IsInRole("User")))
+                return Redirect("/Identity/Account/Login");
             var product = db.Products.FirstOrDefault(p => p.Id == productId);
-
+            
             if (product != null)
             {
                 var item = db.Carts.FirstOrDefault(i => i.ProductId == productId && i.UserId == _userManager.GetUserId(User));
