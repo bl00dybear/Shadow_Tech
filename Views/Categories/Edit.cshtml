@@ -4,31 +4,31 @@
     ViewBag.Title = "Editare Categorie";
 }
 
-<h2>Editare Categorie</h2>
+<h2>Edit Category</h2>
 
 <form asp-action="Edit" asp-controller="Categories" method="post">
 
     <div class="form-group">
-        <label asp-for="Name" class="form-label">Denumire categorie</label>
+        <label asp-for="Name" class="form-label">Name</label>
         <br />
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="Description" class="form-label">Descrie categoria in cateva cuvinte</label>
+        <label asp-for="Description" class="form-label">Description</label>
         <br />
         <input asp-for="Description" class="form-control" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="Image" class="form-label">Imagine categorie</label>
+        <label asp-for="Image" class="form-label">Category image</label>
         <br />
         <input asp-for="Image" class="form-control" />
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
 
     <br /><br />
-    <button class="btn btn-primary" type="submit">Salveaza modificarile</button>
+    <button class="btn btn-primary" type="submit">Save</button>
 </form>

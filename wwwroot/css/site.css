@@ -58,7 +58,8 @@ header a:hover {
 body {
     color: #ef4f7b;
     font-family: Riseria, sans-serif;
-    background: url('../images/BackGroundShadowTech.png') repeat;
+/*    background-color: #141414;*/
+        background: url('../images/BackGroundShadowTech.png') ;
     background-size: cover;
 }
 

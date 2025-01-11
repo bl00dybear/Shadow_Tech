@@ -19,7 +19,7 @@
                 }
                 else
                 {
-                    <p class="card-text">Produsul nu are review-uri inca</p>
+                    <p class="card-text">No reviews yet</p>
                 }
                 <div class="d-flex">
                     
@@ -47,7 +47,7 @@
                         <button class="btn btn-outline-dark flex-shrink-0"
                                 type="submit"
                                 style="margin-top:15px; color:white;">
-                            Adauga in cos
+                            Add to cart
                         </button>
 
                        
@@ -58,20 +58,20 @@
                 @if (ViewBag.AfisareButoane || ViewBag.EsteAdmin)
                 {
                     <form method="get" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">
-                        <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Editeaza produs</button>
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit" style="margin-top:15px; color:white;">Edit product</button>
                     </form>
                 }
 
-                <form method="post" asp-controller="Products" asp-action="Show">
+                <form method="post" asp-controller="Products" asp-action="Show" style="margin-botton:10px">
                         <input type="hidden" name="ProductId" value="@Model.Id" />
 
-                        <label>Continut Review</label>
+                        <label>Leave us a review</label>
                         <br />
 
                         <textarea class="form-control" name="Comment"></textarea>
 
                         
-                        <label>Lasa-ne si o nota</label>
+            
                         <div class="rating">
                             <input type="radio" id="star5" name="Rating" value="5" />
                             <label for="star5" title="5 stele">☆</label>
@@ -90,7 +90,7 @@
                         </div>
 
                         <br /><br />
-                        <button class="btn btn-success" type="submit">Adauga Review-ul</button>
+                        <button class="btn btn-success" type="submit">Add Review</button>
                 </form>
 
 

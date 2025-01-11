@@ -58,15 +58,14 @@
                     @if (ViewBag.EsteAdmin == true)
                     {
                         <a href="@Url.Action("Show", "Products", new { id = product.Id })" class="text-decoration-none" style="color: inherit">
-                            <div class="card homeCard" style="height:38rem;">
+                            <div class="card homeCard" style="height:35rem;">
                                 <img src="@product.Photo" class="card-img-top" style="width:90%" alt="...">
                                 <div class="card-body">
                                     <h3 class="card-title">@product.Title</h3>
                                     <h4 class="card-text" style="color:#f15178">@product.Price lei</h4>
-                                    <p class="card-text">@product.Description</p>
-                                        <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
-                                            <button class="btn btn-danger" type="submit">Delete Product</button>
-                                        </form>
+                                    <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
+                                        <button class="btn btn-danger" type="submit">Delete Product</button>
+                                    </form>
                                 </div>
                             </div>
                         </a>

@@ -20,8 +20,8 @@
                             </div>
                             <div class="feed-item-list">
                                 <div>
-                                    <h5 class="font-size-16 mb-1">Billing Info</h5>
-                                    <p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
+                                    <h5 class="font-size-16 mb-1">Delivery Info</h5>
+     
                                     <div class="mb-3">
                                         
                                             <div>
@@ -29,41 +29,40 @@
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
                                                             <label asp-for="Name" class="form-label" for="billing-name">Name</label>
-                                                            <input asp-for="Name" type="text" class="form-control" id="billing-name" placeholder="Enter name" style="background-color:transparent">
+                                                            <input asp-for="Name" type="text" class="form-control" id="billing-name" placeholder="Enter name" >
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
                                                             <label asp-for="Email" class="form-label" for="billing-email-address">Email Address</label>
-                                                            <input asp-for="Email" type="email" class="form-control" id="billing-email-address" placeholder="Enter email" style="background-color:transparent">
+                                                            <input asp-for="Email" type="email" class="form-control" id="billing-email-address" placeholder="Enter email" >
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
                                                             <label asp-for="Phone"class="form-label" for="billing-phone">Phone</label>
-                                                            <input asp-for="Phone" type=" text" class="form-control" id="billing-phone" placeholder="Enter Phone no." style="background-color:transparent">
+                                                            <input asp-for="Phone" type=" text" class="form-control" id="billing-phone" placeholder="Enter Phone no." >
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label asp-for="Address" class="form-label" for="billing-address">Address</label>
-                                                    <textarea asp-for="Address" class="form-control" id="billing-address" rows="3" placeholder="Enter full address" style="background-color:transparent"></textarea>
+                                                    <textarea asp-for="Address" class="form-control" id="billing-address" rows="3" placeholder="Enter full address" ></textarea>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="mb-4 mb-lg-0">
                                                             <label asp-for="Country"  class="form-label">Country</label>
-                                                            <select asp-for="Country" class="form-control form-select" title="Country" style="background-color:transparent">
+                                                            <select asp-for="Country" class="form-control form-select" title="Country" >
                                                                 <option value="0">Select Country</option>
-                                                                <option value="AF">Afghanistan</option>
-                                                                <option value="AL">Albania</option>
-                                                                <option value="DZ">Algeria</option>
-                                                                <option value="AS">American Samoa</option>
-                                                                <option value="AD">Andorra</option>
-                                                                <option value="AO">Angola</option>
-                                                                <option value="AI">Anguilla</option>
+                                                                <option value="RO">Romania</option>
+                                                                <option value="D">Germany</option>
+                                                                <option value="F">France</option>
+                                                                <option value="A">Austria</option>
+                                                                <option value="E">Spain</option>
+                                                                <option value="UK">United Kingdon</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -71,14 +70,14 @@
                                                     <div class="col-lg-4">
                                                         <div class="mb-4 mb-lg-0">
                                                             <label asp-for="City"  class="form-label" for="billing-city">City</label>
-                                                            <input asp-for="City" type="text" class="form-control" id="billing-city" placeholder="Enter City" style="background-color:transparent">
+                                                            <input asp-for="City" type="text" class="form-control" id="billing-city" placeholder="Enter City" >
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-4">
                                                         <div class="mb-0">
                                                             <label asp-for="PostalCode" class="form-label" for="zip-code">Zip / Postal code</label>
-                                                            <input asp-for="PostalCode" type="text" class="form-control" id="zip-code" placeholder="Enter Postal code" style="background-color:transparent">
+                                                            <input asp-for="PostalCode" type="text" class="form-control" id="zip-code" placeholder="Enter Postal code" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,16 +96,12 @@
                             </div>
                             <div class="feed-item-list">
                                 <div>
-                                    <h5 class="font-size-16 mb-1">Payment Info</h5>
-                                    <p class="text-muted text-truncate mb-4">Duis arcu tortor, suscipit eget</p>
-                                </div>
-                                <div>
                                     <h5 class="font-size-14 mb-3">Payment method :</h5>
                                     <div class="row">
-                                        <div class="col-lg-3 col-sm-6" style="background-color:transparent">
-                                            <div data-bs-toggle="collapse">
-                                                <label class="card-radio-label">
-                                                        <input asp-for="CardPayment" value="true" type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+                                        <div class="col-lg-3 col-sm-6">
+                                            <div data-bs-toggle="collapse" >
+                                                    <label class="card-radio-label" >
+                                                        <input asp-for="CardPayment" value="true" type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input" >
                                                     <span class="card-radio py-3 text-center text-truncate">
                                                         <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                         Credit / Debit Card
@@ -115,9 +110,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 col-sm-6">
-                                            <div>
-                                                <label class="card-radio-label">
+                                        <div class="col-lg-3 col-sm-6" >
+                                            <div style ="background-color:transparent">
+                                                <label class="card-radio-label" >
                                                     <input asp-for="CardPayment" value="false" type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
 
                                                     <span class="card-radio py-3 text-center text-truncate">
@@ -125,6 +120,7 @@
                                                         <span>Cash on Delivery</span>
                                                     </span>
                                                 </label>
+
                                             </div>
                                         </div>
 
@@ -159,6 +155,13 @@
                     <div class="p-3 mb-3">
                         <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
                     </div>
+
+
+                  
+                        
+                    
+
+
                     <div class="table-responsive">
                         <table class="table table-centered mb-0 table-nowrap">
                             <thead>

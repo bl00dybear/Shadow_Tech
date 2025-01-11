@@ -14,7 +14,7 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 <div class="form-group">
-                    <label asp-for="Title" class="form-label">Titlu Produs</label>
+                    <label asp-for="Title" class="form-label">Title</label>
                     <br />
                     <input asp-for="Title" class="form-control" />
 
@@ -23,7 +23,7 @@
                     <br /><br />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Description" class="form-label">Descrierea Produsului</label>
+                    <label asp-for="Description" class="form-label">Product Description</label>
                     <br />
                     <textarea asp-for="Description" class="form-control" ><</textarea>
 
@@ -32,7 +32,7 @@
                     <br /><br />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Price" class="form-label">Pret Produs</label>
+                    <label asp-for="Price" class="form-label">Price</label>
                     <br />
                     <input asp-for="Price" class="form-control" />
 
@@ -41,7 +41,7 @@
                     <br /><br />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Stock" class="form-label">Stoc Produs</label>
+                    <label asp-for="Stock" class="form-label">Stock</label>
                     <br />
                     <input asp-for="Stock" class="form-control" />
 
@@ -50,7 +50,7 @@
                     <br /><br />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Photo" class="form-label">Poza Produs (URL)</label>
+                    <label asp-for="Photo" class="form-label">Product photo (URL)</label>
                     <br />
                     <textarea asp-for="Photo" class="form-control" ></textarea>
 
@@ -59,7 +59,7 @@
                     <br /><br />
                 </div>
                 <div class="form-group">
-                    <label for="CategoryId">Selectati categoria</label>
+                    <label for="CategoryId">Select category</label>
                     <br />
                     <select asp-for="CategoryId" asp-items="Model.Categ" class="form-control">
                         <option value="">Selectati categoria</option>
@@ -72,7 +72,7 @@
                 </div>
                 
                 <br />
-                <button class="btn btn-success" type="submit">Adauga produs</button>
+                <button class="btn btn-success" type="submit">Add Product</button>
 
             </form>
         </div>
